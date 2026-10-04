@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Toán lớp 2 của Hà Vy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Layout: một cột rộng tối đa 1000px, ưu tiên máy tính bảng; thẻ câu hỏi kẻ ô li như vở học sinh. */
+:root{
+  --bg:#eaf5f3; --surface:#ffffff; --ink:#17323f; --muted:#56707d; --line:#c9dfdb; --grid:#d3e8f2;
+  --brand:#0c8580; --brand-ink:#ffffff; --sun:#ffc531; --sun-ink:#3a2a00;
+  --ok:#23884c; --mid:#b86e00; --bad:#cf3f32; --ok-bg:#e0f4e7; --bad-bg:#fde6e3; --mid-bg:#fff1d6;
+  --display:"Baloo 2","Nunito","Segoe UI",system-ui,sans-serif;
+  --body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#10212a; --surface:#1a303b; --ink:#eaf4f3; --muted:#a3bac2; --line:#2e4a56; --grid:#284350;
+  --brand:#3cc4bd; --brand-ink:#05282a; --sun:#ffd257; --sun-ink:#3a2a00;
+  --ok:#5fd08d; --mid:#f4b451; --bad:#ff8a7c; --ok-bg:#1c3f2d; --bad-bg:#4a2622; --mid-bg:#45361a; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#10212a; --surface:#1a303b; --ink:#eaf4f3; --muted:#a3bac2; --line:#2e4a56; --grid:#284350;
+  --brand:#3cc4bd; --brand-ink:#05282a; --sun:#ffd257; --sun-ink:#3a2a00;
+  --ok:#5fd08d; --mid:#f4b451; --bad:#ff8a7c; --ok-bg:#1c3f2d; --bad-bg:#4a2622; --mid-bg:#45361a; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:500 17px/1.55 var(--body);padding-inline:16px;padding-block:14px 48px}
+.app{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--display);line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:1.5rem} h2{font-size:1.35rem} h3{font-size:1.1rem}
+p{margin:0}
+#view{display:flex;flex-direction:column;gap:22px;min-width:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.top h1{flex:1 1 220px;min-width:0}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.tab{min-height:44px;padding:6px 16px;border-radius:999px;border:2px solid var(--line);background:var(--surface);font-weight:800}
+.tab[aria-current="page"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.stars{font:800 1.05rem var(--display);background:var(--sun);color:var(--sun-ink);padding:6px 14px;border-radius:999px;white-space:nowrap}
+
+.hello{background:var(--brand);color:var(--brand-ink);border-radius:22px;padding:20px 22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hello svg{flex:0 0 auto;width:84px;height:84px}
+.hello div{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.hello h2{font-size:1.7rem}
+.hello .wish{font-size:1.1rem;font-weight:700}
+.hello .streak{font-weight:700;opacity:.92}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-weight:700;color:var(--muted)}
+.lv{display:inline-flex;align-items:center;gap:6px;font-weight:800;white-space:nowrap}
+.lv svg{width:18px;height:18px;flex:0 0 auto}
+.lv1{color:var(--ok)} .lv2{color:var(--mid)} .lv3{color:var(--bad)}
+
+.topic{display:flex;flex-direction:column;gap:12px}
+.topic-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:flex-end;border-bottom:3px solid var(--line);padding-bottom:8px}
+.topic-head div{flex:1 1 260px;min-width:0}
+.topic-head p{color:var(--muted);font-size:.95rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .meta{color:var(--muted);font-size:.9rem;font-weight:700}
+.lvbtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.lvbtn{flex:1 1 76px;min-height:48px;border-radius:12px;border:2px solid currentColor;background:var(--surface);padding:4px 6px;justify-content:center;font-size:.92rem}
+.lvbtn:hover{background:var(--bg)}
+.mix{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-weight:700;color:var(--muted);font-size:.92rem}
+.mix .lvbtn{flex:0 0 auto;min-height:40px;padding:2px 12px}
+.btn{min-height:50px;padding:8px 20px;border-radius:14px;border:2px solid var(--line);background:var(--surface);font-weight:800}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}
+.btn.ghost{min-height:44px;padding:4px 14px}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.soon{color:var(--muted);font-size:.95rem}
+.soon b{color:var(--ink)}
+
+.prac{display:flex;flex-direction:column;gap:14px}
+.ptop{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ptop h2{flex:1 1 200px;min-width:0;font-size:1.15rem}
+.pcount{font:800 1rem var(--display);color:var(--muted)}
+.pips{display:flex;gap:6px}
+.pips i{flex:1;height:10px;border-radius:6px;background:var(--line)}
+.pips i.cur{background:var(--sun)} .pips i.ok{background:var(--ok)} .pips i.bad{background:var(--bad)}
+.qcard{background-color:var(--surface);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px;align-items:center}
+.qhead{align-self:stretch;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;font-size:.92rem}
+.qsk{color:var(--muted);font-weight:700}
+.warn{align-self:stretch;background:var(--bad-bg);color:var(--bad);border-radius:10px;padding:6px 12px;font-weight:800;font-size:.95rem}
+.qtext{font:700 1.45rem/1.4 var(--display);text-align:center;max-width:34ch;background:var(--surface);border-radius:10px;padding:2px 8px}
+.qtext .box{display:inline-block;min-width:1.6em;border:2px dashed var(--brand);border-radius:8px;color:var(--brand)}
+.vis{max-width:100%;overflow-x:auto;background:var(--surface);border-radius:12px;padding:8px}
+.vis svg{display:block;height:auto;max-width:100%}
+.g-a{fill:var(--brand)} .g-b{fill:var(--sun)} .g-w{fill:var(--ink)} .g-x{fill:var(--line)}
+.cell{fill:var(--surface);stroke:var(--muted);stroke-width:1.5}
+.xl{stroke:var(--bad);stroke-width:2.5;fill:none}
+.ln{stroke:var(--ink);stroke-width:2.5;fill:none;stroke-linecap:round}
+.ln2{stroke:var(--muted);stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.qb{fill:var(--sun)}
+.tx{font:800 15px var(--body);text-anchor:middle;fill:var(--ink)}
+.tx.tb{fill:var(--brand-ink)} .tx.ts{fill:var(--sun-ink)} .tx.tk{fill:var(--surface)}
+.ansrow{display:flex;align-items:center;gap:10px;font:800 1.6rem var(--display)}
+.ansbox{min-width:120px;min-height:60px;padding:4px 16px;border:3px solid var(--brand);border-radius:14px;background:var(--surface);text-align:center;font-variant-numeric:tabular-nums}
+.ansbox:empty::before{content:"?";color:var(--line)}
+.pad{display:grid;grid-template-columns:repeat(6,minmax(0,58px));gap:8px;justify-content:center;width:100%}
+.pad button{min-height:54px;border-radius:12px;border:2px solid var(--line);background:var(--surface);font:800 1.35rem var(--display)}
+.pad button:active{background:var(--sun);color:var(--sun-ink)}
+.pad .wide{grid-column:span 2;font-size:1rem}
+.choices{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.choice{min-width:86px;min-height:60px;padding:6px 18px;border-radius:14px;border:3px solid var(--line);background:var(--surface);font:800 1.4rem var(--display)}
+.choice[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:var(--brand-ink)}
+.locked .pad button,.locked .choice{opacity:.55;cursor:default}
+.fb{border-radius:14px;padding:12px 16px;font-weight:700;min-height:1px}
+.fb:empty{display:none}
+.fb.ok{background:var(--ok-bg);color:var(--ok)} .fb.bad{background:var(--bad-bg);color:var(--bad)} .fb.info{background:var(--mid-bg);color:var(--mid)}
+.fb .sol{color:var(--ink);font-weight:500;margin-top:6px;display:flex;flex-direction:column;gap:2px}
+.fb .sol b{font-weight:800}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.actions .btn{flex:1 1 150px}
+
+.result{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.score{font:800 2.6rem var(--display);color:var(--brand);font-variant-numeric:tabular-nums}
+.rlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.rlist li{display:flex;gap:10px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:6px}
+.rlist .mk{font-weight:800;flex:0 0 1.4em} .rlist .mk.ok{color:var(--ok)} .rlist .mk.bad{color:var(--bad)}
+.rlist span{min-width:0}
+
+.panel{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel>p,.panel li{max-width:75ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.tile{background:var(--bg);border-radius:14px;padding:12px 14px}
+.tile b{display:block;font:800 1.8rem var(--display);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:.9rem;font-weight:700}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.95rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.85rem;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.mid{background:var(--mid-bg);color:var(--mid)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.na{background:var(--bg);color:var(--muted)}
+.bar{height:10px;border-radius:6px;background:var(--bad-bg);overflow:hidden;min-width:70px}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar.empty{background:var(--line)}
+.plist{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+.sync{color:var(--muted);font-size:.9rem;font-weight:700}
+.rowbtn{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+@media (max-width:520px){ .pad{grid-template-columns:repeat(4,minmax(0,1fr))} .qtext{font-size:1.25rem} .hello h2{font-size:1.4rem} }
+@media (prefers-reduced-motion:no-preference){ .fb.ok{animation:pop .35s ease-out} @keyframes pop{from{transform:scale(.96)}to{transform:scale(1)}} }
+</style>
+</head>
+<body>
+
+
+<div class="app">
+  <header class="top">
+    <h1>Toán lớp 2 của Hà Vy</h1>
+    <span class="stars" id="stars" title="Số sao đã đạt">★ 0</span>
+    <nav class="nav" aria-label="Điều hướng">
+      <button class="tab" id="tabHome" data-act="home">Học bài</button>
+      <button class="tab" id="tabParent" data-act="parent">Góc phụ huynh</button>
+    </nav>
+  </header>
+  <main id="view"></main>
+</div>
+
+<script>
+/* ---------- Tiện ích ---------- */
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[R(0,a.length-1)];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const box='<span class="box">?</span>';
+const noCarry=()=>{const t1=R(1,7),t2=R(1,8-t1),u1=R(0,8),u2=R(0,9-u1);return[t1*10+u1,t2*10+u2]};
+const noBorrow=()=>{const t1=R(2,9),u1=R(1,9),t2=R(1,t1-1),u2=R(0,u1);return[t1*10+u1,t2*10+u2]};
+const cross=()=>{const a=R(2,9);return[a,R(11-a,9)]};          // a + b qua 10
+const crossSub=()=>{const n=R(11,18);return[n,R(n-9,9)]};       // n - b qua 10
+const giai=(loi,pt,ds)=>['<b>Bài giải</b>',loi,pt,'Đáp số: '+ds+'.'];
+
+/* ---------- Hình minh họa (SVG) ---------- */
+const svg=(w,h,s,label,k=1.5)=>`<svg viewBox="0 0 ${w} ${h}" width="${Math.round(w*k)}" role="img" aria-label="${label}">${s}</svg>`;
+function blocks(n){const t=Math.floor(n/10),u=n%10,c=11;let x=4,s='';
+  for(let i=0;i<t;i++){for(let j=0;j<10;j++)s+=`<rect class="g-a" x="${x}" y="${4+j*c}" width="${c-1}" height="${c-1}" rx="2"/>`;x+=c+6}
+  x+=8;for(let j=0;j<u;j++)s+=`<rect class="g-b" x="${x}" y="${4+(9-j)*c}" width="${c-1}" height="${c-1}" rx="2"/>`;
+  return svg(x+c+4,118,s,'Các thanh chục và khối đơn vị')}
+function frames(a,b,sub){const c=26,tot=sub?a:a+b;let s='';
+  for(let f=0;f<2;f++)for(let i=0;i<10;i++){const x=4+f*(5*c+16)+(i%5)*c,y=4+Math.floor(i/5)*c,k=f*10+i;
+    s+=`<rect class="cell" x="${x}" y="${y}" width="${c}" height="${c}"/>`;
+    if(k<tot){const out=sub&&k>=a-b;s+=`<circle class="${out?'g-x':(sub||k<a)?'g-a':'g-b'}" cx="${x+c/2}" cy="${y+c/2}" r="9"/>`;
+      if(out)s+=`<path class="xl" d="M${x+6} ${y+6}L${x+c-6} ${y+c-6}M${x+c-6} ${y+6}L${x+6} ${y+c-6}"/>`}}
+  return svg(24+10*c,8+2*c,s,'Hai khung mười ô với các chấm tròn')}
+function nline(v,mi){const W=v.length*60+10;let s=`<path class="ln" d="M10 30H${W}M${W} 30l-8 -5M${W} 30l-8 5"/>`;
+  v.forEach((n,i)=>{const x=30+i*60;s+=`<path class="ln" d="M${x} 23v14"/>`;
+    s+=i===mi?`<rect class="qb" x="${x-17}" y="44" width="34" height="26" rx="6"/><text class="tx ts" x="${x}" y="63">?</text>`:`<text class="tx" x="${x}" y="63">${n}</text>`});
+  return svg(W+12,76,s,'Tia số có một số còn thiếu')}
+function rows(a,b){let s='';for(let i=0;i<a;i++)s+=`<circle class="g-a" cx="${16+i*27}" cy="16" r="11"/>`;
+  for(let i=0;i<b;i++)s+=`<circle class="g-b" cx="${16+i*27}" cy="46" r="11"/>`;
+  return svg(10+Math.max(a,b)*27,62,s,'Hai hàng chấm tròn')}
+function balance(L,Rr){const it=(arr,cx)=>arr.map((t,i)=>{const w=46,x=cx-(arr.length*w)/2+i*w+2,q=t==='?';
+    return `<rect class="${q?'g-b':'g-w'}" x="${x}" y="34" width="${w-4}" height="32" rx="${q?15:5}"/><text class="tx ${q?'ts':'tk'}" x="${x+(w-4)/2}" y="56">${q?'?':t+' kg'}</text>`}).join('');
+  return svg(400,128,`<path class="ln2" d="M26 70H174M226 70H374M100 70V86H300V70M200 86V120M160 122H240"/>`+it(L,100)+it(Rr,300),'Cân đĩa đang thăng bằng',1.4)}
+function cans(v){let s='';v.forEach((n,i)=>{const x=8+i*74;
+    s+=`<rect class="g-a" x="${x+18}" y="4" width="18" height="14" rx="3"/><rect class="g-a" x="${x}" y="14" width="54" height="70" rx="10"/><text class="tx tb" x="${x+27}" y="56">${n} l</text>`});
+  return svg(v.length*74+2,90,s,'Các can nước có ghi số lít')}
+
+/* ---------- Chương trình: chủ đề và dạng bài (sách Kết nối tri thức, Toán 2 tập 1) ---------- */
+const TOPICS=[
+ {id:'t1',name:'Ôn tập và bổ sung',sub:'Các số đến 100, tia số, thành phần của phép cộng và phép trừ, cộng trừ không nhớ.',next:'Phép cộng, phép trừ trong phạm vi 20'},
+ {id:'t2',name:'Phép cộng, phép trừ trong phạm vi 20',sub:'Cộng, trừ qua 10; bài toán thêm, bớt; bài toán nhiều hơn, ít hơn.',next:'Làm quen với khối lượng, dung tích'},
+ {id:'t3',name:'Làm quen với khối lượng, dung tích',sub:'Ki-lô-gam, lít và các bài toán có đơn vị đo.',next:'Phép cộng, phép trừ (có nhớ) trong phạm vi 100 (sẽ bổ sung ở giai đoạn 2)'}
+];
+const SK=[
+ {id:'cd',t:'t1',name:'Chục và đơn vị',tip:'Cho bé dùng que tính hoặc bó chục để tách số thành chục và đơn vị, đọc to "mấy chục, mấy đơn vị".',extra:'Bổ sung bài viết số thành tổng của chục và đơn vị (ví dụ 47 = 40 + 7).'},
+ {id:'ss',t:'t1',name:'So sánh các số',tip:'Nhắc bé so sánh chữ số hàng chục trước; nếu bằng nhau mới so sánh hàng đơn vị.',extra:'Bổ sung bài sắp xếp dãy số theo thứ tự từ bé đến lớn và ngược lại.'},
+ {id:'lt',t:'t1',name:'Tia số, số liền trước, số liền sau',tip:'Cho bé đếm xuôi, đếm ngược trên tia số; liền trước là bớt 1, liền sau là thêm 1.',extra:'Bổ sung bài đếm cách 2, cách 5, cách 10 trên tia số.'},
+ {id:'tp',t:'t1',name:'Số hạng, tổng, số bị trừ, số trừ, hiệu',tip:'Viết một phép tính và cùng bé gọi tên từng số; lặp lại vài lần mỗi ngày.',extra:'Bổ sung bài lập phép tính từ tên gọi các thành phần.'},
+ {id:'hk',t:'t1',name:'Hơn, kém nhau bao nhiêu',tip:'Hướng dẫn bé xếp hai nhóm đồ vật thành hai hàng để nhìn thấy phần hơn, rồi làm phép trừ.',extra:'Bổ sung bài so sánh ba số lượng và tìm phần chênh lệch.'},
+ {id:'ck',t:'t1',name:'Cộng, trừ không nhớ trong phạm vi 100',tip:'Cho bé đặt tính theo cột dọc, thẳng hàng chục và hàng đơn vị, tính từ hàng đơn vị.',extra:'Bổ sung bài tính nhẩm với các số tròn chục.'},
+ {id:'c10',t:'t2',name:'Phép cộng qua 10',tip:'Luyện cách "tách số để làm tròn 10": 9 + 5 = 9 + 1 + 4 = 14. Cho bé học thuộc bảng cộng qua 10.',extra:'Bổ sung trò chơi đọc nhanh bảng cộng qua 10 trong 5 phút mỗi ngày.'},
+ {id:'t10',t:'t2',name:'Phép trừ qua 10',tip:'Luyện cách "trừ để còn 10 rồi trừ tiếp": 13 − 5 = 13 − 3 − 2 = 8. Cho bé học thuộc bảng trừ qua 10.',extra:'Bổ sung bài nối phép trừ với phép cộng tương ứng (8 + 5 = 13 thì 13 − 5 = 8).'},
+ {id:'th',t:'t2',name:'Tìm số còn thiếu trong phép tính',tip:'Gợi ý bé dùng phép tính ngược: muốn tìm số hạng thì lấy tổng trừ đi số hạng đã biết.',extra:'Bổ sung bài điền số vào bảng cộng, bảng trừ còn trống.'},
+ {id:'tb',t:'t2',name:'Bài toán thêm, bớt',tip:'Tập cho bé gạch chân từ khóa: "thêm", "tất cả" là phép cộng; "bớt", "còn lại" là phép trừ.',extra:'Bổ sung bài tự đặt đề toán theo tranh.'},
+ {id:'nh',t:'t2',name:'Bài toán nhiều hơn, ít hơn',tip:'Cho bé vẽ sơ đồ đoạn thẳng để thấy ai có nhiều hơn trước khi chọn phép tính.',extra:'Bổ sung bài toán "nhiều hơn, ít hơn" có cách hỏi ngược.'},
+ {id:'kg',t:'t3',name:'Ki-lô-gam và cân đĩa',tip:'Cho bé cầm thử túi 1 kg (đường, gạo) và quan sát cân ở nhà để cảm nhận khối lượng.',extra:'Bổ sung bài ước lượng cân nặng của đồ vật quen thuộc.'},
+ {id:'lit',t:'t3',name:'Lít',tip:'Cho bé rót nước bằng chai 1 lít vào ca, xô để hình dung dung tích.',extra:'Bổ sung bài so sánh sức chứa của các đồ vật trong nhà.'},
+ {id:'dv',t:'t3',name:'Bài toán có đơn vị kg, lít',tip:'Nhắc bé luôn viết đơn vị (kg, l) trong phép tính và đáp số.',extra:'Bổ sung bài toán hai bước tính có đơn vị đo.'}
+];
+const SKM={};SK.forEach(s=>SKM[s.id]=s);
+const LV={1:'Trung bình',2:'Khá',3:'Khó'};
+const tach=(a,b)=>{const k=10-a;return[`Tách ${b} = ${k} + ${b-k}.`,`${a} + ${k} = 10.`,`10 + ${b-k} = ${a+b}.`]};
+const tachTru=(n,b)=>{const k=n-10;return k===b?[`${n} − ${b} = 10.`]:[`Tách ${b} = ${k} + ${b-k}.`,`${n} − ${k} = 10.`,`10 − ${b-k} = ${n-b}.`]};
+
+const CTX=[
+ {u:'con chim',have:a=>`Trên cành có ${a} con chim`,add:b=>`có thêm ${b} con chim bay đến`,sub:b=>`có ${b} con chim bay đi`,who:'trên cành'},
+ {u:'quả trứng',have:a=>`Trong rổ có ${a} quả trứng`,add:b=>`mẹ bỏ thêm ${b} quả trứng vào rổ`,sub:b=>`mẹ lấy ra ${b} quả trứng`,who:'trong rổ'},
+ {u:'bạn',have:a=>`Trên sân có ${a} bạn đang chơi`,add:b=>`có thêm ${b} bạn chạy đến`,sub:b=>`có ${b} bạn đi vào lớp`,who:'trên sân'},
+ {u:'quyển vở',have:a=>`Trên giá có ${a} quyển vở`,add:b=>`cô giáo xếp thêm ${b} quyển vở lên giá`,sub:b=>`cô giáo lấy đi ${b} quyển vở`,who:'trên giá'}
+];
+const PAIR=[['Mai','Mi','bông hoa'],['Nam','Việt','viên bi'],['Mi','Mai','nhãn vở'],['Việt','Nam','cái kẹo']];
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+
+const G={
+ cd(l){
+  if(l===1){const n=R(11,99),t=Math.floor(n/10),u=n%10;return{t:'Hình vẽ biểu diễn số nào?',vis:blocks(n),pv:`${t} thanh chục, ${u} khối đơn vị`,kind:'num',ans:n,ex:[`Có ${t} thanh chục và ${u} khối đơn vị.`,`${t} chục và ${u} đơn vị là số ${n}.`]}}
+  if(l===2){const a=R(1,9),b=R(0,9),n=a*10+b;
+   if(R(0,1))return{t:`Số gồm ${a} chục và ${b} đơn vị là số nào?`,kind:'num',ans:n,ex:[`${a} chục là ${a*10}.`,`${a*10} + ${b} = ${n}.`],expr:`${a*10}+${b}`};
+   const c=R(0,1);return{t:`Chữ số hàng ${c?'chục':'đơn vị'} của số ${n} là chữ số nào?`,kind:'num',ans:c?a:b,ex:[`Số ${n} gồm ${a} chục và ${b} đơn vị.`,`Chữ số hàng ${c?'chục':'đơn vị'} là ${c?a:b}.`]}}
+  const d=shuf([1,2,3,4,5,6,7,8,9]).slice(0,3),s=d.slice().sort((x,y)=>x-y),big=R(0,1);
+  const ans=big?s[2]*10+s[1]:s[0]*10+s[1];
+  return{t:`Từ ba thẻ số ${d.join(', ')}, hãy lập số có hai chữ số ${big?'lớn nhất':'bé nhất'} (mỗi thẻ chỉ dùng một lần).`,kind:'num',ans,
+   ex:[big?`Chọn chữ số lớn nhất làm hàng chục: ${s[2]}.`:`Chọn chữ số bé nhất làm hàng chục: ${s[0]}.`,big?`Chọn chữ số lớn thứ hai làm hàng đơn vị: ${s[1]}.`:`Chọn chữ số bé thứ hai làm hàng đơn vị: ${s[1]}.`,`Số cần lập là ${ans}.`]}},
+ ss(l){
+  const sign=(x,y)=>x>y?'>':x<y?'<':'=';
+  if(l===1){let a=R(10,99),b=R(0,3)?R(10,99):Math.floor(a/10)*10+R(0,9);if(b<10)b=a;const g=sign(a,b);
+   return{t:`Chọn dấu thích hợp: ${a} ${box} ${b}`,kind:'mc',ch:['>','<','='],ans:g,
+    ex:[Math.floor(a/10)!==Math.floor(b/10)?`So sánh hàng chục: ${Math.floor(a/10)} chục ${sign(Math.floor(a/10),Math.floor(b/10))==='>'?'lớn hơn':'bé hơn'} ${Math.floor(b/10)} chục.`:a===b?'Hai số giống nhau.':`Hàng chục bằng nhau, so sánh hàng đơn vị: ${a%10} ${sign(a%10,b%10)} ${b%10}.`,`Vậy ${a} ${g} ${b}.`]}}
+  if(l===2){const x=R(1,8),y=R(x+1,9),set=new Set([x*10+y,y*10+x]);while(set.size<4)set.add(R(10,99));
+   const v=shuf([...set]),big=R(0,1),ans=big?Math.max(...v):Math.min(...v);
+   return{t:`Số ${big?'lớn nhất':'bé nhất'} trong các số ${v.join(', ')} là số nào?`,kind:'mc',ch:v.map(String),ans:String(ans),
+    ex:[`Sắp xếp từ bé đến lớn: ${v.slice().sort((p,q)=>p-q).join(', ')}.`,`Số ${big?'lớn nhất':'bé nhất'} là ${ans}.`]}}
+  const[a,b]=noCarry(),s=a+b,c=Math.max(1,s+R(-3,3)),g=sign(s,c);
+  return{t:`Chọn dấu thích hợp: ${a} + ${b} ${box} ${c}`,kind:'mc',ch:['>','<','='],ans:g,cmp:[`${a}+${b}`,`${c}`],ex:[`Tính trước: ${a} + ${b} = ${s}.`,`So sánh: ${s} ${g} ${c}.`]}},
+ lt(l){
+  if(l===1){const n=R(10,98),sau=R(0,1);return{t:`Số liền ${sau?'sau':'trước'} của ${n} là số nào?`,kind:'num',ans:sau?n+1:n-1,expr:sau?`${n}+1`:`${n}-1`,
+   ex:[sau?`Số liền sau hơn số đã cho 1 đơn vị.`:`Số liền trước kém số đã cho 1 đơn vị.`,sau?`${n} + 1 = ${n+1}.`:`${n} − 1 = ${n-1}.`]}}
+  if(l===2){const s=R(5,90),v=[0,1,2,3,4,5].map(i=>s+i),mi=R(1,4);return{t:'Số nào còn thiếu trên tia số?',vis:nline(v,mi),pv:`tia số ${v.map((x,i)=>i===mi?'?':x).join(', ')}`,kind:'num',ans:v[mi],
+   ex:[`Các số trên tia số tăng dần, mỗi vạch thêm 1.`,`Sau ${v[mi-1]} là ${v[mi]}.`]}}
+  if(R(0,1)){const st=pick([2,5,10]),s=st*R(1,Math.floor((100-5*st)/st)),v=[0,1,2,3,4,5].map(i=>s+i*st),mi=R(2,4);
+   return{t:'Các số trên tia số cách đều nhau. Số nào còn thiếu?',vis:nline(v,mi),pv:`tia số ${v.map((x,i)=>i===mi?'?':x).join(', ')}`,kind:'num',ans:v[mi],
+    ex:[`${v[0]} đến ${v[1]} thêm ${st}, nên mỗi vạch thêm ${st}.`,`${v[mi-1]} + ${st} = ${v[mi]}.`]}}
+  const n=R(11,97);return{t:`Số liền trước của một số là ${n-1}. Số liền sau của số đó là số nào?`,kind:'num',ans:n+1,
+   ex:[`Số đó là ${n-1} + 1 = ${n}.`,`Số liền sau của ${n} là ${n} + 1 = ${n+1}.`]}},
+ tp(l){
+  const add=R(0,1),[a,b]=add?noCarry():noBorrow(),r=add?a+b:a-b,eq=add?`${a} + ${b} = ${r}`:`${a} − ${b} = ${r}`;
+  if(l===1){const i=R(0,2),num=[a,b,r][i],name=add?['Số hạng','Số hạng','Tổng'][i]:['Số bị trừ','Số trừ','Hiệu'][i];
+   return{t:`Trong phép tính ${eq}, số ${num} được gọi là gì?`,kind:'mc',ch:add?['Số hạng','Tổng','Số bị trừ','Hiệu']:['Số bị trừ','Số trừ','Hiệu','Tổng'],ans:name,
+    ex:[add?'Trong phép cộng: số hạng + số hạng = tổng.':'Trong phép trừ: số bị trừ − số trừ = hiệu.',`Số ${num} là ${name.toLowerCase()}.`]}}
+  if(l===2)return add?{t:`Hai số hạng là ${a} và ${b}. Tổng là bao nhiêu?`,kind:'num',ans:r,expr:`${a}+${b}`,ex:['Tổng = số hạng + số hạng.',eq+'.']}
+   :{t:`Số bị trừ là ${a}, số trừ là ${b}. Hiệu là bao nhiêu?`,kind:'num',ans:r,expr:`${a}-${b}`,ex:['Hiệu = số bị trừ − số trừ.',eq+'.']};
+  return add?{t:`Tổng của hai số hạng là ${r}. Một số hạng là ${a}. Số hạng kia là bao nhiêu?`,kind:'num',ans:b,expr:`${r}-${a}`,ex:['Muốn tìm một số hạng, lấy tổng trừ đi số hạng kia.',`${r} − ${a} = ${b}.`]}
+   :{t:`Hiệu là ${r}, số trừ là ${b}. Số bị trừ là bao nhiêu?`,kind:'num',ans:a,expr:`${r}+${b}`,ex:['Muốn tìm số bị trừ, lấy hiệu cộng với số trừ.',`${r} + ${b} = ${a}.`]}},
+ hk(l){
+  if(l===1){const a=R(5,10),b=R(2,a-1),hon=R(0,1);return{t:hon?`Hàng trên có ${a} chấm tròn, hàng dưới có ${b} chấm tròn. Hàng trên nhiều hơn hàng dưới mấy chấm tròn?`:`Hàng trên có ${a} chấm tròn, hàng dưới có ${b} chấm tròn. Hàng dưới ít hơn hàng trên mấy chấm tròn?`,
+   vis:rows(a,b),kind:'num',ans:a-b,expr:`${a}-${b}`,ex:['Muốn biết hơn, kém nhau bao nhiêu, lấy số lớn trừ số bé.',`${a} − ${b} = ${a-b}.`]}}
+  if(l===2){const[a,b]=noBorrow(),c=pick([['Lớp 2A','Lớp 2B','học sinh'],['Tổ Một','Tổ Hai','quyển sách'],['Mai','Nam','nhãn vở']]),hon=R(0,1);
+   return{t:`${c[0]} có ${a} ${c[2]}, ${c[1]} có ${b} ${c[2]}. Hỏi ${hon?`${c[0]} nhiều hơn ${c[1]}`:`${c[1]} ít hơn ${c[0]}`} bao nhiêu ${c[2]}?`,kind:'num',ans:a-b,expr:`${a}-${b}`,
+    ex:giai(hon?`${c[0]} nhiều hơn ${c[1]} số ${c[2]} là:`:`${c[1]} ít hơn ${c[0]} số ${c[2]} là:`,`${a} − ${b} = ${a-b} (${c[2]})`,`${a-b} ${c[2]}`)}}
+  const T=R(2,9)*10,u=shuf([0,1,2,3,4,5,6,7,8,9]).slice(0,3),v=u.map(x=>T+x),mx=Math.max(...v),mn=Math.min(...v);
+  return{t:`Mai hái được ${v[0]} bông hoa, Nam hái được ${v[1]} bông hoa, Việt hái được ${v[2]} bông hoa. Bạn hái nhiều nhất hơn bạn hái ít nhất bao nhiêu bông hoa?`,kind:'num',ans:mx-mn,expr:`${mx}-${mn}`,
+   ex:[`Số lớn nhất là ${mx}, số bé nhất là ${mn}.`,`${mx} − ${mn} = ${mx-mn} (bông hoa).`,`Đáp số: ${mx-mn} bông hoa.`]}},
+ ck(l){
+  if(l===1){const k=R(0,2);
+   if(k===0){const t=R(1,8),u=R(1,8),b=R(1,9-u),a=t*10+u;return{t:`${a} + ${b} = ${box}`,kind:'num',ans:a+b,expr:`${a}+${b}`,ex:[`Cộng hàng đơn vị: ${u} + ${b} = ${u+b}.`,`Giữ nguyên ${t} chục.`,`${a} + ${b} = ${a+b}.`]}}
+   if(k===1){const a=R(1,8),b=R(1,9-a);return{t:`${a*10} + ${b*10} = ${box}`,kind:'num',ans:(a+b)*10,expr:`${a*10}+${b*10}`,ex:[`${a} chục + ${b} chục = ${a+b} chục.`,`${a*10} + ${b*10} = ${(a+b)*10}.`]}}
+   const t=R(1,9),u=R(2,9),b=R(1,u),a=t*10+u;return{t:`${a} − ${b} = ${box}`,kind:'num',ans:a-b,expr:`${a}-${b}`,ex:[`Trừ hàng đơn vị: ${u} − ${b} = ${u-b}.`,`Giữ nguyên ${t} chục.`,`${a} − ${b} = ${a-b}.`]}}
+  if(l===2){if(R(0,1)){const[a,b]=noCarry();return{t:`${a} + ${b} = ${box}`,kind:'num',ans:a+b,expr:`${a}+${b}`,ex:[`Cộng hàng đơn vị: ${a%10} + ${b%10} = ${a%10+b%10}.`,`Cộng hàng chục: ${Math.floor(a/10)} + ${Math.floor(b/10)} = ${Math.floor(a/10)+Math.floor(b/10)}.`,`${a} + ${b} = ${a+b}.`]}}
+   const[a,b]=noBorrow();return{t:`${a} − ${b} = ${box}`,kind:'num',ans:a-b,expr:`${a}-${b}`,ex:[`Trừ hàng đơn vị: ${a%10} − ${b%10} = ${a%10-b%10}.`,`Trừ hàng chục: ${Math.floor(a/10)} − ${Math.floor(b/10)} = ${Math.floor(a/10)-Math.floor(b/10)}.`,`${a} − ${b} = ${a-b}.`]}}
+  const[a,b]=noCarry(),s=a+b;
+  if(R(0,1)){let c=0;while(c<1)c=R(0,Math.floor(s/10))*10+R(0,s%10);return{t:`${a} + ${b} − ${c} = ${box}`,kind:'num',ans:s-c,expr:`${a}+${b}-${c}`,ex:['Tính lần lượt từ trái sang phải.',`${a} + ${b} = ${s}.`,`${s} − ${c} = ${s-c}.`]}}
+  return{t:`${a} + ${box} = ${s}`,kind:'num',ans:b,expr:`${s}-${a}`,ex:['Muốn tìm số hạng chưa biết, lấy tổng trừ đi số hạng đã biết.',`${s} − ${a} = ${b}.`]}},
+ c10(l){
+  if(l===1){const a=pick([9,8,7]),b=R(11-a,9);return{t:`${a} + ${b} = ${box}`,vis:frames(a,b),kind:'num',ans:a+b,expr:`${a}+${b}`,ex:tach(a,b)}}
+  if(l===2){const[a,b]=cross();return{t:`${a} + ${b} = ${box}`,kind:'num',ans:a+b,expr:`${a}+${b}`,ex:tach(a,b)}}
+  const[a,b]=cross(),s=a+b;
+  if(R(0,1)){const c=R(1,20-s);return{t:`${a} + ${b} + ${c} = ${box}`,kind:'num',ans:s+c,expr:`${a}+${b}+${c}`,ex:['Tính lần lượt từ trái sang phải.',`${a} + ${b} = ${s}.`,`${s} + ${c} = ${s+c}.`]}}
+  const c=R(s-9,9);return{t:`${a} + ${b} − ${c} = ${box}`,kind:'num',ans:s-c,expr:`${a}+${b}-${c}`,ex:['Tính lần lượt từ trái sang phải.',`${a} + ${b} = ${s}.`,`${s} − ${c} = ${s-c}.`]}},
+ t10(l){
+  const[n,b]=crossSub();
+  if(l===1)return{t:`${n} − ${b} = ${box}`,vis:frames(n,b,true),kind:'num',ans:n-b,expr:`${n}-${b}`,ex:tachTru(n,b)};
+  if(l===2)return{t:`${n} − ${b} = ${box}`,kind:'num',ans:n-b,expr:`${n}-${b}`,ex:tachTru(n,b)};
+  const r=n-b,c=R(1,r);return{t:`${n} − ${b} − ${c} = ${box}`,kind:'num',ans:r-c,expr:`${n}-${b}-${c}`,ex:['Tính lần lượt từ trái sang phải.',`${n} − ${b} = ${r}.`,`${r} − ${c} = ${r-c}.`]}},
+ th(l){
+  if(l===1){const[a,b]=cross();return{t:`${a} + ${box} = ${a+b}`,kind:'num',ans:b,expr:`${a+b}-${a}`,ex:['Lấy tổng trừ đi số hạng đã biết.',`${a+b} − ${a} = ${b}.`]}}
+  if(l===2){const[n,b]=crossSub(),c=n-b;return R(0,1)?{t:`${box} − ${b} = ${c}`,kind:'num',ans:n,expr:`${c}+${b}`,ex:['Lấy hiệu cộng với số trừ.',`${c} + ${b} = ${n}.`]}
+   :{t:`${n} − ${box} = ${c}`,kind:'num',ans:b,expr:`${n}-${c}`,ex:['Lấy số bị trừ trừ đi hiệu.',`${n} − ${c} = ${b}.`]}}
+  let c,d,s;do{[c,d]=cross();s=c+d}while(s>15);
+  if(R(0,1)){const[a,b]=cross(),g=a+b>s?'>':a+b<s?'<':'=';return{t:`Chọn dấu thích hợp: ${a} + ${b} ${box} ${c} + ${d}`,kind:'mc',ch:['>','<','='],ans:g,cmp:[`${a}+${b}`,`${c}+${d}`],ex:[`${a} + ${b} = ${a+b}.`,`${c} + ${d} = ${s}.`,`${a+b} ${g} ${s}.`]}}
+  const a=pick([2,3,4,5,6,7,8,9].filter(x=>x>=s-9&&x!==c&&x!==d));
+  return{t:`${a} + ${box} = ${c} + ${d}`,kind:'num',ans:s-a,expr:`${c}+${d}-${a}`,ex:[`Tính vế phải: ${c} + ${d} = ${s}.`,`${a} + ? = ${s}, nên ? = ${s} − ${a} = ${s-a}.`]}},
+ tb(l){
+  const c=pick(CTX);
+  if(l===1){const[a,b]=cross();return{t:`${c.have(a)}, ${c.add(b)}. Hỏi ${c.who} có tất cả bao nhiêu ${c.u}?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:c.u,ex:giai(`${cap(c.who)} có tất cả số ${c.u} là:`,`${a} + ${b} = ${a+b} (${c.u})`,`${a+b} ${c.u}`)}}
+  if(l===2){const[n,b]=crossSub();return{t:`${c.have(n)}, ${c.sub(b)}. Hỏi ${c.who} còn lại bao nhiêu ${c.u}?`,kind:'num',ans:n-b,expr:`${n}-${b}`,unit:c.u,ex:giai(`${cap(c.who)} còn lại số ${c.u} là:`,`${n} − ${b} = ${n-b} (${c.u})`,`${n-b} ${c.u}`)}}
+  const[a,b]=cross(),s=a+b,d=R(s-9,9);
+  return{t:`${c.have(a)}, ${c.add(b)}. Sau đó ${c.sub(d)}. Hỏi ${c.who} còn lại bao nhiêu ${c.u}?`,kind:'num',ans:s-d,expr:`${a}+${b}-${d}`,unit:c.u,
+   ex:['<b>Bài giải</b>',`Sau khi thêm, ${c.who} có: ${a} + ${b} = ${s} (${c.u})`,`${cap(c.who)} còn lại: ${s} − ${d} = ${s-d} (${c.u})`,`Đáp số: ${s-d} ${c.u}.`]}},
+ nh(l){
+  const[A,B,it]=pick(PAIR);
+  if(l===1){const[a,b]=cross();return{t:`${A} có ${a} ${it}. ${B} có nhiều hơn ${A} ${b} ${it}. Hỏi ${B} có bao nhiêu ${it}?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:it,ex:giai(`${B} có số ${it} là:`,`${a} + ${b} = ${a+b} (${it})`,`${a+b} ${it}`)}}
+  if(l===2){const[n,b]=crossSub();return{t:`${A} có ${n} ${it}. ${B} có ít hơn ${A} ${b} ${it}. Hỏi ${B} có bao nhiêu ${it}?`,kind:'num',ans:n-b,expr:`${n}-${b}`,unit:it,ex:giai(`${B} có số ${it} là:`,`${n} − ${b} = ${n-b} (${it})`,`${n-b} ${it}`)}}
+  if(R(0,1)){const[n,b]=crossSub();return{t:`${A} có ${n} ${it}. ${A} có nhiều hơn ${B} ${b} ${it}. Hỏi ${B} có bao nhiêu ${it}?`,kind:'num',ans:n-b,expr:`${n}-${b}`,unit:it,
+   ex:[`${A} nhiều hơn ${B} nghĩa là ${B} ít hơn ${A} ${b} ${it}.`,...giai(`${B} có số ${it} là:`,`${n} − ${b} = ${n-b} (${it})`,`${n-b} ${it}`)]}}
+  const[a,b]=cross();return{t:`${A} có ${a} ${it}. ${A} có ít hơn ${B} ${b} ${it}. Hỏi ${B} có bao nhiêu ${it}?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:it,
+   ex:[`${A} ít hơn ${B} nghĩa là ${B} nhiều hơn ${A} ${b} ${it}.`,...giai(`${B} có số ${it} là:`,`${a} + ${b} = ${a+b} (${it})`,`${a+b} ${it}`)]}},
+ kg(l){
+  const vat=pick(['Túi gạo','Quả bí','Quả dưa','Bao ngô']);
+  if(l===1){const w=[pick([10,5,2]),pick([1,2,5])];if(R(0,1))w.push(pick([1,2]));const s=w.reduce((x,y)=>x+y,0);
+   return{t:`Cân thăng bằng. ${vat} cân nặng bao nhiêu ki-lô-gam?`,vis:balance(['?'],w),pv:`quả cân ${w.join(' kg, ')} kg`,kind:'num',ans:s,expr:w.join('+'),unit:'kg',ex:[`Cân thăng bằng nên ${vat.toLowerCase()} nặng bằng tổng các quả cân.`,`${w.join(' + ')} = ${s} (kg).`]}}
+  if(l===2){if(R(0,1)){const[a,b]=R(0,1)?cross():noCarry();return{t:`${a} kg + ${b} kg = ${box} kg`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:'kg',ex:['Cộng hai số đo cùng đơn vị ki-lô-gam.',`${a} + ${b} = ${a+b}, nên kết quả là ${a+b} kg.`]}}
+   const[a,b]=R(0,1)?crossSub():noBorrow();return{t:`${a} kg − ${b} kg = ${box} kg`,kind:'num',ans:a-b,expr:`${a}-${b}`,unit:'kg',ex:['Trừ hai số đo cùng đơn vị ki-lô-gam.',`${a} − ${b} = ${a-b}, nên kết quả là ${a-b} kg.`]}}
+  const w1=pick([1,2,5]),rt=[pick([10,5]),pick([1,2,5])],s=rt[0]+rt[1];
+  return{t:`Cân thăng bằng. ${vat} cân nặng bao nhiêu ki-lô-gam?`,vis:balance(['?',w1],rt),pv:`đĩa trái: ${vat.toLowerCase()} và quả cân ${w1} kg; đĩa phải: ${rt.join(' kg, ')} kg`,kind:'num',ans:s-w1,expr:`${rt[0]}+${rt[1]}-${w1}`,unit:'kg',
+   ex:[`Đĩa bên phải nặng: ${rt[0]} + ${rt[1]} = ${s} (kg).`,`Đĩa bên trái có ${vat.toLowerCase()} và quả cân ${w1} kg.`,`${vat} nặng: ${s} − ${w1} = ${s-w1} (kg).`]}},
+ lit(l){
+  if(l===1){const v=[pick([5,10]),pick([2,3,5])];if(R(0,1))v.push(pick([1,2,3]));const s=v.reduce((x,y)=>x+y,0);
+   return{t:`Các can đều chứa đầy nước. Cả ${v.length===2?'hai':'ba'} can có bao nhiêu lít nước?`,vis:cans(v),pv:`các can ${v.join(' l, ')} l`,kind:'num',ans:s,expr:v.join('+'),unit:'l',ex:['Cộng số lít nước của các can.',`${v.join(' + ')} = ${s} (l).`]}}
+  if(l===2){const[a,b]=cross(),s=a+b,c=R(1,s-10+R(0,8));return{t:`${a} l + ${b} l − ${c} l = ${box} l`,kind:'num',ans:s-c,expr:`${a}+${b}-${c}`,unit:'l',ex:['Tính lần lượt từ trái sang phải.',`${a} + ${b} = ${s}.`,`${s} − ${c} = ${s-c}, nên kết quả là ${s-c} l.`]}}
+  const n=R(12,20),a=pick([2,3,5]),b=pick([1,2,3,5]);
+  return{t:`Thùng có ${n} lít nước. Mẹ rót nước từ thùng cho đầy hai can như hình. Hỏi trong thùng còn lại bao nhiêu lít nước?`,vis:cans([a,b]),pv:`hai can ${a} l và ${b} l`,kind:'num',ans:n-a-b,expr:`${n}-${a}-${b}`,unit:'l',
+   ex:['<b>Bài giải</b>',`Mẹ đã rót ra: ${a} + ${b} = ${a+b} (l)`,`Trong thùng còn lại: ${n} − ${a+b} = ${n-a-b} (l)`,`Đáp số: ${n-a-b} l.`]}},
+ dv(l){
+  if(l===1){const[a,b]=R(0,1)?cross():noCarry();return R(0,1)?{t:`Bao gạo cân nặng ${a} kg, bao ngô cân nặng ${b} kg. Hỏi cả hai bao cân nặng bao nhiêu ki-lô-gam?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:'kg',ex:giai('Cả hai bao cân nặng là:',`${a} + ${b} = ${a+b} (kg)`,`${a+b} kg`)}
+   :{t:`Can thứ nhất có ${a} lít dầu, can thứ hai có ${b} lít dầu. Hỏi cả hai can có bao nhiêu lít dầu?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:'l',ex:giai('Cả hai can có số lít dầu là:',`${a} + ${b} = ${a+b} (l)`,`${a+b} l`)}}
+  if(l===2){if(R(0,1)){const[a,b]=cross();return{t:`Con ngỗng cân nặng ${a} kg. Con chó nặng hơn con ngỗng ${b} kg. Hỏi con chó cân nặng bao nhiêu ki-lô-gam?`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:'kg',ex:giai('Con chó cân nặng là:',`${a} + ${b} = ${a+b} (kg)`,`${a+b} kg`)}}
+   const[n,b]=crossSub();return{t:`Thùng to chứa ${n} lít nước. Thùng nhỏ chứa ít hơn thùng to ${b} lít nước. Hỏi thùng nhỏ chứa bao nhiêu lít nước?`,kind:'num',ans:n-b,expr:`${n}-${b}`,unit:'l',ex:giai('Thùng nhỏ chứa số lít nước là:',`${n} − ${b} = ${n-b} (l)`,`${n-b} l`)}}
+  const[a,b]=cross(),s=a+b,c=R(s-9,9);
+  return{t:`Mẹ mua ${a} kg gạo nếp và ${b} kg gạo tẻ. Mẹ đã dùng hết ${c} kg gạo. Hỏi mẹ còn lại bao nhiêu ki-lô-gam gạo?`,kind:'num',ans:s-c,expr:`${a}+${b}-${c}`,unit:'kg',
+   ex:['<b>Bài giải</b>',`Mẹ mua tất cả: ${a} + ${b} = ${s} (kg)`,`Mẹ còn lại: ${s} − ${c} = ${s-c} (kg)`,`Đáp số: ${s-c} kg.`]}}
+};
+
+/* ---------- Dữ liệu kết quả ---------- */
+const fresh=()=>({v:1,u:0,stars:0,skills:{},miss:[],days:[]});
+let S=fresh();
+function norm(o){const s=fresh();if(!o||typeof o!=='object')return s;
+  s.u=+o.u||0;s.stars=+o.stars||0;
+  if(o.skills&&typeof o.skills==='object')for(const k in o.skills){if(!SKM[k])continue;s.skills[k]={};for(const l of['l1','l2','l3']){const a=o.skills[k][l];if(Array.isArray(a))s.skills[k][l]=[+a[0]||0,+a[1]||0]}}
+  if(Array.isArray(o.miss))s.miss=o.miss.filter(m=>m&&SKM[m.s]).slice(0,40).map(m=>({s:m.s,l:+m.l||1,q:String(m.q||''),a:String(m.a||''),r:String(m.r||''),d:+m.d||0}));
+  if(Array.isArray(o.days))s.days=o.days.filter(d=>typeof d==='string').slice(-90);
+  return s}
+function stat(id,lv){const k=S.skills[id]||{};let n=0,ok=0;for(const l of(lv?[lv]:[1,2,3])){const a=k['l'+l];if(a){n+=a[0];ok+=a[1]}}return{n,ok,acc:n?Math.round(ok*100/n):0}}
+function grade(st){return st.n<5?['na','Chưa đủ dữ liệu']:st.acc>=85?['ok','Vững']:st.acc>=65?['mid','Cần luyện thêm']:['bad','Hay sai']}
+const dayKey=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function streak(){let n=0;const d=new Date();if(!S.days.includes(dayKey(d)))d.setDate(d.getDate()-1);while(S.days.includes(dayKey(d))){n++;d.setDate(d.getDate()-1)}return n}
+function weakList(){return SK.map(s=>({s,st:stat(s.id)})).filter(x=>x.st.n>=3&&x.st.acc<80).sort((a,b)=>a.st.acc-b.st.acc)}
+function weakLevel(id){let best=1,low=101;for(const l of[1,2,3]){const st=stat(id,l);if(st.n&&st.acc<low){low=st.acc;best=l}}return best}
+
+if(typeof module!=='undefined')module.exports={G,SK,TOPICS};
+if(typeof document!=='undefined'){
+let P=null,cur='home',writing=false,dirty=false,timer=null,syncMsg='Đang kết nối nơi lưu kết quả…',askReset=false,queue=[];
+const view=document.getElementById('view');
+const API='https://script.google.com/macros/s/AKfycbxM0jQc8ypO45VeJpERiGuVZcmMg_VzB3l0Po7DhB5lyi_r1G0H8uu8d0pMWKKy5cNXNQ/exec';
+const MSG_OK='Kết quả đã được ghi vào Google Sheet.',MSG_LOCAL='Chưa ghi được vào Google Sheet, kết quả đang lưu tạm trên thiết bị này.';
+try{S=norm(JSON.parse(localStorage.getItem('tl2-havy')||'null'));queue=JSON.parse(localStorage.getItem('tl2-queue')||'[]')}catch(e){}
+if(!Array.isArray(queue))queue=[];
+function saveLocal(){try{localStorage.setItem('tl2-havy',JSON.stringify(S));localStorage.setItem('tl2-queue',JSON.stringify(queue.slice(-300)))}catch(e){}}
+function setSync(m){syncMsg=m;const el=document.getElementById('sync');if(el)el.textContent=m}
+function save(){S.u=Date.now();saveLocal();dirty=true;clearTimeout(timer);timer=setTimeout(push,1200)}
+function push(){if(writing||!dirty)return;writing=true;dirty=false;const sent=queue.slice(0,60);
+  fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({state:JSON.stringify(S),events:JSON.stringify(sent)})})
+    .then(r=>r.json()).then(j=>{if(!j||!j.ok)throw new Error('save');queue=queue.slice(sent.length);saveLocal();writing=false;setSync(MSG_OK);if(queue.length)dirty=true;if(dirty)push()})
+    .catch(()=>{writing=false;dirty=true;setSync(MSG_LOCAL)})}
+fetch(API+'?api=load').then(r=>r.json()).then(j=>{try{const r=norm(JSON.parse((j&&j.state)||'null'));
+      if(r.u>S.u){S=r;saveLocal();if(cur!=='prac')render()}else if(S.u>r.u||queue.length){dirty=true;push()}}catch(e){}
+    setSync(MSG_OK)}).catch(()=>setSync(MSG_LOCAL));
+
+function rec(q,ok,given){if(q.redo)return;const plain=q.t.replace(/<[^>]+>/g,'')+(q.pv?' ['+q.pv+']':'');queue.push({d:Date.now(),s:q.sk,l:q.lv,q:plain,a:String(given),r:String(q.ans),ok:ok?1:0});const k=S.skills[q.sk]||(S.skills[q.sk]={}),a=k['l'+q.lv]||(k['l'+q.lv]=[0,0]);a[0]++;
+  if(ok){a[1]++;S.stars+=q.lv}
+  else{S.miss.unshift({s:q.sk,l:q.lv,q:q.t.replace(/<[^>]+>/g,'')+(q.pv?' ['+q.pv+']':''),a:String(given),r:String(q.ans),d:Date.now()});S.miss=S.miss.slice(0,40)}
+  const d=dayKey();if(!S.days.includes(d)){S.days.push(d);S.days=S.days.slice(-90)}
+  save();document.getElementById('stars').textContent='★ '+S.stars}
+
+/* ---------- Giao diện ---------- */
+const ICON={1:'<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="currentColor"/></svg>',
+ 2:'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l9 9-9 9-9-9z" fill="currentColor"/></svg>',
+ 3:'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l9.5 17.5h-19z" fill="currentColor"/><path d="M10 7v6" stroke="var(--surface)" stroke-width="2.2" stroke-linecap="round"/><circle cx="10" cy="15.6" r="1.3" fill="var(--surface)"/></svg>'};
+const lvTag=l=>`<span class="lv lv${l}">${ICON[l]}${LV[l]}</span>`;
+const WISH=['Chúc Hà Vy học thật vui và làm bài thật giỏi!','Mỗi ngày một chút, Hà Vy sẽ giỏi Toán hơn mỗi ngày!','Ba mẹ luôn tự hào về sự chăm chỉ của Hà Vy.','Sai một câu không sao cả, mình làm lại là sẽ nhớ lâu hơn!','Hà Vy cứ bình tĩnh đọc kỹ đề, con sẽ làm được!','Hôm nay Hà Vy thử chinh phục một bài mức Khó nhé!','Chăm học hôm nay, giỏi giang ngày mai. Cố lên Hà Vy!','Cả nhà tin Hà Vy làm được. Bắt đầu thôi nào!','Chúc Hà Vy hái thật nhiều ngôi sao hôm nay!','Toán học rất thú vị, Hà Vy cùng khám phá nhé!'];
+const PRAISE=['Chính xác! Hà Vy giỏi quá!','Đúng rồi! Con làm rất tốt!','Tuyệt vời! Con tiếp tục phát huy nhé!','Giỏi lắm! Đáp án hoàn toàn đúng!'];
+const wish=pick(WISH);
+function hello(){const d=new Date(),h=d.getHours(),bd=d.getDate()===30&&d.getMonth()===10;
+  const hi=bd?'Chúc mừng sinh nhật Hà Vy!':h<11?'Chào buổi sáng, Hà Vy!':h<14?'Chào buổi trưa, Hà Vy!':h<18?'Chào buổi chiều, Hà Vy!':'Chào buổi tối, Hà Vy!';
+  const st=streak(),w=bd?'Chúc con tuổi mới luôn vui khỏe, học giỏi và hái thật nhiều ngôi sao!':wish;
+  return `<section class="hello"><svg viewBox="0 0 84 84" aria-hidden="true"><g stroke="var(--sun)" stroke-width="5" stroke-linecap="round"><path d="M42 4v10M42 70v10M4 42h10M70 42h10M15 15l7 7M62 62l7 7M69 15l-7 7M22 62l-7 7"/></g><circle cx="42" cy="42" r="22" fill="var(--sun)"/><circle cx="34" cy="38" r="3" fill="var(--sun-ink)"/><circle cx="50" cy="38" r="3" fill="var(--sun-ink)"/><path d="M33 47q9 9 18 0" stroke="var(--sun-ink)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+  <div><h2>${hi}</h2><p class="wish">${w}</p><p class="streak">${st>1?`Con đã học ${st} ngày liên tiếp. `:''}Con đang có ${S.stars} ngôi sao.</p></div></section>`}
+function renderHome(){const wk=weakList();
+  view.innerHTML=hello()+
+  `<div class="legend"><span>Mức độ bài tập:</span>${lvTag(1)}${lvTag(2)}${lvTag(3)}<span>(mức Khó là bài thử thách)</span></div>`+
+  (wk.length?`<div class="rowbtn"><button class="btn sun" data-act="weak">Ôn lại phần con hay sai</button><span class="soon">Gồm: ${wk.slice(0,3).map(x=>esc(x.s.name)).join('; ')}.</span></div>`:'')+
+  TOPICS.map((t,i)=>`<section class="topic"><div class="topic-head"><div><h2>Chủ đề ${i+1}. ${t.name}</h2><p>${t.sub}</p></div>
+    <div class="mix"><span>Luyện tổng hợp:</span>${[1,2,3].map(l=>`<button class="lv lv${l} lvbtn" data-act="mix" data-t="${t.id}" data-lv="${l}">${ICON[l]}${LV[l]}</button>`).join('')}</div></div>
+    <div class="cards">${SK.filter(s=>s.t===t.id).map(s=>{const st=stat(s.id);return `<article class="card"><h3>${s.name}</h3>
+      <p class="meta">${st.n?`Đã làm ${st.n} câu, đúng ${st.acc}%`:'Chưa luyện tập'}</p>
+      <div class="lvbtns">${[1,2,3].map(l=>`<button class="lv lv${l} lvbtn" data-act="start" data-sk="${s.id}" data-lv="${l}" aria-label="${s.name}, mức ${LV[l]}">${ICON[l]}${LV[l]}</button>`).join('')}</div></article>`}).join('')}</div></section>`).join('')+
+  `<p class="soon"><b>Sắp bổ sung:</b> Phép cộng, phép trừ (có nhớ) trong phạm vi 100; Làm quen với hình phẳng; Ngày – giờ, giờ – phút, ngày – tháng; các chủ đề của học kỳ 2.</p>`}
+
+function build(list,n){const qs=[],seen=new Set();let g=0;
+  while(qs.length<n&&g++<300){const[sk,lv]=list[qs.length%list.length],q=G[sk](lv),key=q.t+(q.pv||'')+q.ans;if(seen.has(key))continue;seen.add(key);q.sk=sk;q.lv=lv;q.in='';q.sel=null;qs.push(q)}
+  return qs}
+function startP(title,list,again){P={title,list,qs:build(list,8),i:0};cur='prac';render();window.scrollTo(0,0)}
+function renderPrac(){const q=P.qs[P.i];
+  view.innerHTML=`<section class="prac"><div class="ptop"><button class="btn ghost" data-act="home">← Trang chính</button><h2>${esc(P.title)}</h2><span class="pcount">Câu ${P.i+1}/${P.qs.length}</span></div>
+  <div class="pips" id="pips"></div>
+  <div class="qcard" id="qcard"><div class="qhead">${lvTag(q.lv)}<span class="qsk">${esc(SKM[q.sk].name)}</span></div>
+  ${q.lv===3?'<p class="warn">Bài thử thách: con đọc thật kỹ đề trước khi làm nhé.</p>':''}
+  <p class="qtext">${q.t}</p>${q.vis?`<div class="vis">${q.vis}</div>`:''}
+  ${q.kind==='num'?`<div class="ansrow"><span>Đáp án:</span><output class="ansbox" id="ans"></output></div>
+   <div class="pad">${[1,2,3,4,5,6,7,8,9,0].map(k=>`<button data-act="key" data-k="${k}">${k}</button>`).join('')}<button class="wide" data-act="key" data-k="x">Xóa</button></div>`
+  :`<div class="choices">${q.ch.map(c=>`<button class="choice" data-act="choose" data-c="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join('')}</div>`}</div>
+  <div id="fb" class="g-b" aria-live="polite"></div>
+  <div class="actions"><button class="btn" id="bReveal" data-act="reveal">Xem đáp án</button><button class="btn primary" id="bCheck" data-act="check">Kiểm tra</button><button class="btn primary" id="bNext" data-act="next" hidden>${P.i+1<P.qs.length?'Câu tiếp theo →':'Xem kết quả →'}</button></div></section>`;
+  pips()}
+function pips(){document.getElementById('pips').innerHTML=P.qs.map((x,j)=>`<i class="${x.res===true?'ok':x.res===false?'bad':j===P.i?'cur':''}"></i>`).join('')}
+function fb(html,cls){const el=document.getElementById('fb');el.className='fb '+cls;el.innerHTML=html}
+function lock(q){q.done=true;document.getElementById('qcard').classList.add('locked');document.getElementById('bCheck').hidden=true;document.getElementById('bNext').hidden=false;document.getElementById('bReveal').textContent='Xem lời giải'}
+const sol=q=>`<div class="sol">${q.ex.map(e=>`<span>${e}</span>`).join('')}</div>`;
+const shown=q=>esc(q.ans)+(q.unit&&q.kind==='num'?' '+esc(q.unit):'');
+function check(){const q=P.qs[P.i];if(q.done)return;const g=q.kind==='num'?q.in:q.sel;
+  if(g===''||g==null){fb(q.kind==='num'?'Con hãy bấm số để nhập đáp án trước nhé.':'Con hãy chọn một đáp án trước nhé.','info');return}
+  const ok=String(g)===String(q.ans),first=q.res===undefined;if(first){q.res=ok;rec(q,ok,g)}
+  if(ok){lock(q);fb(pick(PRAISE)+(first&&!q.redo?` Con được thêm ${q.lv} ngôi sao.`:''),'ok')}
+  else{fb('Chưa đúng rồi. Con xem lại đề và thử thêm lần nữa nhé! Nếu cần, con bấm "Xem đáp án".','bad');if(q.kind==='num'){q.in='';document.getElementById('ans').textContent=''}}
+  pips()}
+function reveal(){const q=P.qs[P.i];if(q.res===undefined){q.res=false;rec(q,false,'(xem đáp án)')}
+  const good=q.done&&q.res;lock(q);fb(`Đáp án đúng: <b>${shown(q)}</b>${sol(q)}`,good?'ok':'info');pips()}
+function renderResult(){const ok=P.qs.filter(q=>q.res===true).length,n=P.qs.length,bad=P.qs.filter(q=>q.res!==true);
+  const msg=ok===n?'Xuất sắc! Hà Vy làm đúng tất cả các câu.':ok>=n*0.75?'Rất tốt! Con chỉ cần cẩn thận thêm một chút nữa.':ok>=n*0.5?'Con đã cố gắng. Mình cùng ôn lại các câu sai nhé!':'Không sao cả. Con xem lại lời giải rồi luyện thêm, con sẽ tiến bộ!';
+  view.innerHTML=`<section class="result"><h2>Kết quả: ${esc(P.title)}</h2><p class="score">${ok}/${n} câu đúng</p><p>${msg}</p>
+  <ul class="rlist">${P.qs.map((q,i)=>`<li><b class="mk ${q.res?'ok':'bad'}">${q.res?'✓':'✗'}</b><span>Câu ${i+1}: ${q.t.replace(/<span class="box">\?<\/span>/g,'?')}${q.pv?' ('+esc(q.pv)+')':''} <b>Đáp án: ${shown(q)}</b></span></li>`).join('')}</ul>
+  <div class="actions">${bad.length?'<button class="btn sun" data-act="retry">Làm lại các câu sai</button>':''}${P.list?'<button class="btn" data-act="again">Luyện thêm một lượt mới</button>':''}<button class="btn primary" data-act="home">Về trang chính</button></div></section>`}
+
+function renderParent(){const all=SK.map(s=>({s,st:stat(s.id)})),tot=all.reduce((a,x)=>a+x.st.n,0),ok=all.reduce((a,x)=>a+x.st.ok,0);
+  const head=`<section class="panel"><h2>Góc phụ huynh</h2><p>Thống kê tính theo <b>lần trả lời đầu tiên</b> của mỗi câu. Câu bé bấm "Xem đáp án" khi chưa trả lời đúng được tính là sai.</p><p class="sync" id="sync">${esc(syncMsg)}</p></section>`;
+  if(!tot){view.innerHTML=head+`<section class="panel"><h3>Chưa có kết quả luyện tập</h3><p>Sau khi Hà Vy làm bài ở mục "Học bài", trang này sẽ hiển thị: số câu đúng và sai, tỷ lệ đúng theo từng dạng bài, các kiến thức bé thường sai và đề xuất nội dung cần bổ sung.</p></section>`;return}
+  const byL=[1,2,3].map(l=>{let n=0,o=0;SK.forEach(s=>{const st=stat(s.id,l);n+=st.n;o+=st.ok});return{l,n,o}});
+  const weak=all.filter(x=>x.st.n>=5&&x.st.acc<85).sort((a,b)=>a.st.acc-b.st.acc);
+  const rec=[];
+  weak.forEach(x=>{const l=weakLevel(x.s.id);rec.push(`<b>${x.s.name}</b> (đúng ${x.st.acc}%): ${x.st.acc<65?`cho bé luyện lại từ mức ${LV[Math.max(1,l-1)]}`:`cho bé luyện thêm ở mức ${LV[l]}`}, mỗi ngày một lượt 8 câu. ${x.s.tip} ${x.s.extra}`)});
+  all.filter(x=>x.st.n>=8&&x.st.acc>=85).forEach(x=>{const nx=[2,3].find(l=>stat(x.s.id,l).n<5);if(nx)rec.push(`<b>${x.s.name}</b> (đúng ${x.st.acc}%): bé đã vững, nên chuyển lên mức ${LV[nx]} để thử thách thêm.`)});
+  TOPICS.forEach(t=>{const ss=all.filter(x=>x.s.t===t.id);if(ss.every(x=>x.st.n>=8&&x.st.acc>=85))rec.push(`Chủ đề <b>${t.name}</b>: bé đã vững tất cả các dạng. Đề xuất học tiếp chủ đề: ${t.next}.`)});
+  const un=all.filter(x=>!x.st.n);if(un.length)rec.push(`Các dạng bé chưa luyện: ${un.map(x=>x.s.name).join('; ')}. Nên luyện ở mức Trung bình để có số liệu đánh giá.`);
+  all.filter(x=>x.st.n>0&&x.st.n<5).forEach(x=>rec.push(`<b>${x.s.name}</b>: mới làm ${x.st.n} câu, cần làm thêm để đánh giá chính xác.`));
+  view.innerHTML=head+`<section class="panel"><h3>Tổng quan</h3><div class="tiles">
+   <div class="tile"><b>${tot}</b><span>Câu đã làm</span></div><div class="tile"><b>${ok}</b><span>Câu đúng</span></div><div class="tile"><b>${tot-ok}</b><span>Câu sai</span></div>
+   <div class="tile"><b>${Math.round(ok*100/tot)}%</b><span>Tỷ lệ đúng</span></div><div class="tile"><b>${S.days.length}</b><span>Ngày có học</span></div></div>
+   <div class="tw"><table><thead><tr><th>Mức độ</th><th>Số câu</th><th>Đúng</th><th>Sai</th><th>Tỷ lệ đúng</th><th></th></tr></thead><tbody>
+   ${byL.map(x=>`<tr><td>${lvTag(x.l)}</td><td class="n">${x.n}</td><td class="n">${x.o}</td><td class="n">${x.n-x.o}</td><td class="n">${x.n?Math.round(x.o*100/x.n)+'%':'–'}</td><td><div class="bar ${x.n?'':'empty'}"><i style="width:${x.n?x.o*100/x.n:0}%"></i></div></td></tr>`).join('')}</tbody></table></div></section>
+  <section class="panel"><h3>Kết quả theo từng dạng bài</h3><div class="tw"><table><thead><tr><th>Chủ đề</th><th>Dạng bài</th><th>Số câu</th><th>Đúng</th><th>Sai</th><th>Tỷ lệ đúng</th><th>Đánh giá</th></tr></thead><tbody>
+   ${all.map(x=>{const g=grade(x.st);return `<tr><td>${TOPICS.findIndex(t=>t.id===x.s.t)+1}</td><td>${x.s.name}</td><td class="n">${x.st.n}</td><td class="n">${x.st.ok}</td><td class="n">${x.st.n-x.st.ok}</td><td class="n">${x.st.n?x.st.acc+'%':'–'}</td><td><span class="pill ${g[0]}">${g[1]}</span></td></tr>`}).join('')}</tbody></table></div></section>
+  <section class="panel"><h3>Kiến thức bé thường sai</h3>${weak.length?`<ol class="plist">${weak.map(x=>{const g=grade(x.st),m=S.miss.filter(z=>z.s===x.s.id).slice(0,2);
+    return `<li><b>${x.s.name}</b> <span class="pill ${g[0]}">${g[1]}</span>: sai ${x.st.n-x.st.ok}/${x.st.n} câu.${m.length?' Ví dụ: '+m.map(z=>`"${esc(z.q)}" – bé trả lời ${esc(z.a)}, đáp án đúng ${esc(z.r)}`).join('; ')+'.':''}</li>`}).join('')}</ol>`:'<p>Chưa có dạng bài nào có tỷ lệ đúng dưới 85% (tính trên các dạng đã làm từ 5 câu trở lên).</p>'}</section>
+  <section class="panel"><h3>Định hướng và đề xuất bổ sung</h3>${rec.length?`<ul class="plist">${rec.map(r=>`<li>${r}</li>`).join('')}</ul>`:'<p>Bé đang học tốt ở tất cả các dạng đã luyện. Tiếp tục duy trì mỗi ngày một lượt luyện tập.</p>'}</section>
+  <section class="panel"><h3>Các câu sai gần đây</h3>${S.miss.length?`<div class="tw"><table><thead><tr><th>Ngày</th><th>Dạng bài</th><th>Mức</th><th>Câu hỏi</th><th>Bé trả lời</th><th>Đáp án đúng</th></tr></thead><tbody>
+   ${S.miss.slice(0,20).map(m=>{const d=new Date(m.d);return `<tr><td>${d.getDate()}/${d.getMonth()+1}</td><td>${SKM[m.s].name}</td><td>${lvTag(m.l)}</td><td>${esc(m.q)}</td><td>${esc(m.a)}</td><td>${esc(m.r)}</td></tr>`}).join('')}</tbody></table></div>`:'<p>Chưa có câu sai nào.</p>'}</section>
+  <section class="panel"><h3>Quản lý dữ liệu</h3>${askReset?'<p>Thao tác này xóa toàn bộ thống kê và số sao trên trang, không khôi phục được (nhật ký trong Google Sheet vẫn được giữ lại). Anh/chị có chắc chắn không?</p><div class="rowbtn"><button class="btn danger" data-act="resetYes">Xóa toàn bộ</button><button class="btn" data-act="resetNo">Giữ lại</button></div>':'<div class="rowbtn"><button class="btn danger" data-act="reset">Xóa toàn bộ kết quả</button></div>'}</section>`}
+
+function render(){document.getElementById('stars').textContent='★ '+S.stars;
+  document.getElementById('tabHome').toggleAttribute('aria-current',false);document.getElementById('tabParent').toggleAttribute('aria-current',false);
+  if(cur==='parent')document.getElementById('tabParent').setAttribute('aria-current','page');else document.getElementById('tabHome').setAttribute('aria-current','page');
+  if(cur==='home')renderHome();else if(cur==='parent')renderParent();else if(cur==='prac')renderPrac();else renderResult()}
+function key(k){const q=P&&P.qs[P.i];if(cur!=='prac'||!q||q.kind!=='num'||q.done)return;
+  if(k==='x')q.in=q.in.slice(0,-1);else if(q.in.length<3)q.in=(q.in==='0'?'':q.in)+k;document.getElementById('ans').textContent=q.in}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,d=b.dataset;
+  if(a==='home'){cur='home';askReset=false;render();window.scrollTo(0,0)}
+  else if(a==='parent'){cur='parent';render();window.scrollTo(0,0)}
+  else if(a==='start')startP(SKM[d.sk].name,[[d.sk,+d.lv]]);
+  else if(a==='mix'){const t=TOPICS.find(x=>x.id===d.t);startP('Luyện tổng hợp: '+t.name,shuf(SK.filter(s=>s.t===t.id).map(s=>[s.id,+d.lv])))}
+  else if(a==='weak'){const w=weakList().slice(0,3);if(w.length)startP('Ôn lại phần con hay sai',w.map(x=>[x.s.id,weakLevel(x.s.id)]))}
+  else if(a==='key')key(d.k);
+  else if(a==='choose'){const q=P.qs[P.i];if(q.done)return;q.sel=d.c;view.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed',String(c===b)))}
+  else if(a==='check')check();else if(a==='reveal')reveal();
+  else if(a==='next'){if(P.i+1<P.qs.length){P.i++;renderPrac();window.scrollTo(0,0)}else{cur='result';render();window.scrollTo(0,0)}}
+  else if(a==='retry'){const qs=P.qs.filter(q=>q.res!==true).map(q=>Object.assign({},q,{res:undefined,done:false,in:'',sel:null,redo:true}));P={title:'Làm lại các câu sai',list:null,qs,i:0};cur='prac';render();window.scrollTo(0,0)}
+  else if(a==='again')startP(P.title,P.list);
+  else if(a==='reset'){askReset=true;render()}else if(a==='resetNo'){askReset=false;render()}
+  else if(a==='resetYes'){S=fresh();askReset=false;save();render()}});
+document.addEventListener('keydown',e=>{if(cur!=='prac')return;if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==='Backspace')key('x');
+  else if(e.key==='Enter'&&!e.target.closest('button')){const q=P.qs[P.i];if(q.done)document.getElementById('bNext').click();else check()}});
+render();
+}
+</script>
+
+</body>
+</html>
