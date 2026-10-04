@@ -12,6 +12,7 @@
 :root{
   --bg:#eaf5f3; --surface:#ffffff; --ink:#17323f; --muted:#56707d; --line:#c9dfdb; --grid:#d3e8f2;
   --brand:#0c8580; --brand-ink:#ffffff; --sun:#ffc531; --sun-ink:#3a2a00;
+  --bronze:#b5733a; --silver:#8a99a6;
   --ok:#23884c; --mid:#b86e00; --bad:#cf3f32; --ok-bg:#e0f4e7; --bad-bg:#fde6e3; --mid-bg:#fff1d6;
   --display:"Baloo 2","Nunito","Segoe UI",system-ui,sans-serif;
   --body:"Nunito","Segoe UI",system-ui,sans-serif;
@@ -96,6 +97,11 @@ button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 .ln2{stroke:var(--muted);stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .qb{fill:var(--sun)}
 .tx{font:800 15px var(--body);text-anchor:middle;fill:var(--ink)}
+.tx.tc{font:800 26px var(--display);text-anchor:end;letter-spacing:5px} .tx.tcq{fill:var(--brand)} .tx.tn{font-size:13px} .tx.tr{fill:var(--bad)}
+.sh{fill:var(--grid);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round} .cf{fill:var(--surface);stroke:var(--ink);stroke-width:3}
+.hh{stroke:var(--ink);stroke-width:5.5;stroke-linecap:round;fill:none} .mh{stroke:var(--brand);stroke-width:3.5;stroke-linecap:round;fill:none}
+.medal{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.92rem;color:var(--ink)} .medal svg{width:22px;height:22px;flex:0 0 auto} .medal.none{color:var(--muted);font-weight:700}
+.m1{fill:var(--bronze)} .m2{fill:var(--silver)} .m3{fill:var(--sun)}
 .tx.tb{fill:var(--brand-ink)} .tx.ts{fill:var(--sun-ink)} .tx.tk{fill:var(--surface)}
 .ansrow{display:flex;align-items:center;gap:10px;font:800 1.6rem var(--display)}
 .ansbox{min-width:120px;min-height:60px;padding:4px 16px;border:3px solid var(--brand);border-radius:14px;background:var(--surface);text-align:center;font-variant-numeric:tabular-nums}
@@ -204,7 +210,10 @@ function cans(v){let s='';v.forEach((n,i)=>{const x=8+i*74;
 const TOPICS=[
  {id:'t1',name:'Ôn tập và bổ sung',sub:'Các số đến 100, tia số, thành phần của phép cộng và phép trừ, cộng trừ không nhớ.',next:'Phép cộng, phép trừ trong phạm vi 20'},
  {id:'t2',name:'Phép cộng, phép trừ trong phạm vi 20',sub:'Cộng, trừ qua 10; bài toán thêm, bớt; bài toán nhiều hơn, ít hơn.',next:'Làm quen với khối lượng, dung tích'},
- {id:'t3',name:'Làm quen với khối lượng, dung tích',sub:'Ki-lô-gam, lít và các bài toán có đơn vị đo.',next:'Phép cộng, phép trừ (có nhớ) trong phạm vi 100 (sẽ bổ sung ở giai đoạn 2)'}
+ {id:'t3',name:'Làm quen với khối lượng, dung tích',sub:'Ki-lô-gam, lít và các bài toán có đơn vị đo.',next:'Phép cộng, phép trừ (có nhớ) trong phạm vi 100'},
+ {id:'t4',name:'Phép cộng, phép trừ (có nhớ) trong phạm vi 100',sub:'Cộng, trừ có nhớ; tìm số còn thiếu; bài toán có lời văn.',next:'Làm quen với hình phẳng'},
+ {id:'t5',name:'Làm quen với hình phẳng',sub:'Điểm, đoạn thẳng, đường thẳng, đường cong, ba điểm thẳng hàng, đường gấp khúc, hình tứ giác.',next:'Ngày – giờ, giờ – phút, ngày – tháng'},
+ {id:'t6',name:'Ngày – giờ, giờ – phút, ngày – tháng',sub:'Xem đồng hồ, đổi giờ và phút, xem lịch.',next:'Ôn tập học kỳ 1, sau đó là các chủ đề của học kỳ 2 (sẽ bổ sung ở giai đoạn 3)'}
 ];
 const SK=[
  {id:'cd',t:'t1',name:'Chục và đơn vị',tip:'Cho bé dùng que tính hoặc bó chục để tách số thành chục và đơn vị, đọc to "mấy chục, mấy đơn vị".',extra:'Bổ sung bài viết số thành tổng của chục và đơn vị (ví dụ 47 = 40 + 7).'},
@@ -220,7 +229,18 @@ const SK=[
  {id:'nh',t:'t2',name:'Bài toán nhiều hơn, ít hơn',tip:'Cho bé vẽ sơ đồ đoạn thẳng để thấy ai có nhiều hơn trước khi chọn phép tính.',extra:'Bổ sung bài toán "nhiều hơn, ít hơn" có cách hỏi ngược.'},
  {id:'kg',t:'t3',name:'Ki-lô-gam và cân đĩa',tip:'Cho bé cầm thử túi 1 kg (đường, gạo) và quan sát cân ở nhà để cảm nhận khối lượng.',extra:'Bổ sung bài ước lượng cân nặng của đồ vật quen thuộc.'},
  {id:'lit',t:'t3',name:'Lít',tip:'Cho bé rót nước bằng chai 1 lít vào ca, xô để hình dung dung tích.',extra:'Bổ sung bài so sánh sức chứa của các đồ vật trong nhà.'},
- {id:'dv',t:'t3',name:'Bài toán có đơn vị kg, lít',tip:'Nhắc bé luôn viết đơn vị (kg, l) trong phép tính và đáp số.',extra:'Bổ sung bài toán hai bước tính có đơn vị đo.'}
+ {id:'dv',t:'t3',name:'Bài toán có đơn vị kg, lít',tip:'Nhắc bé luôn viết đơn vị (kg, l) trong phép tính và đáp số.',extra:'Bổ sung bài toán hai bước tính có đơn vị đo.'},
+ {id:'cn',t:'t4',name:'Phép cộng có nhớ',tip:'Cho bé đặt tính theo cột dọc, cộng hàng đơn vị trước và nói to "viết mấy, nhớ 1".',extra:'Bổ sung bài tính nhẩm cộng một số với số tròn chục rồi cộng tiếp phần đơn vị.'},
+ {id:'tn',t:'t4',name:'Phép trừ có nhớ',tip:'Nhắc bé câu "không trừ được thì mượn 1 chục", sau đó nhớ trả 1 vào hàng chục của số trừ.',extra:'Bổ sung bài thử lại phép trừ bằng phép cộng.'},
+ {id:'sc',t:'t4',name:'Tìm số còn thiếu, so sánh (có nhớ)',tip:'Gợi ý bé tính kết quả từng vế trước rồi mới so sánh hoặc tìm số còn thiếu.',extra:'Bổ sung bài điền số vào chuỗi phép tính liên tiếp.'},
+ {id:'lv',t:'t4',name:'Bài toán có lời văn (có nhớ)',tip:'Cho bé tóm tắt đề bằng một dòng trước khi viết phép tính và đáp số.',extra:'Bổ sung bài toán hai bước tính trong phạm vi 100.'},
+ {id:'dd',t:'t5',name:'Điểm, đoạn thẳng',tip:'Cho bé chấm các điểm, đặt tên bằng chữ in hoa rồi dùng thước nối thành đoạn thẳng và đọc tên.',extra:'Bổ sung bài đo độ dài đoạn thẳng bằng thước có vạch xăng-ti-mét.'},
+ {id:'dc',t:'t5',name:'Đường thẳng, đường cong, ba điểm thẳng hàng',tip:'Dùng thước kiểm tra: ba điểm cùng nằm sát mép thước thì thẳng hàng.',extra:'Bổ sung bài tìm các bộ ba điểm thẳng hàng trong hình có nhiều điểm.'},
+ {id:'gk',t:'t5',name:'Đường gấp khúc',tip:'Cho bé dùng ngón tay đi dọc theo đường gấp khúc và đếm từng đoạn, sau đó cộng độ dài các đoạn.',extra:'Bổ sung bài vẽ đường gấp khúc theo độ dài cho trước.'},
+ {id:'tg',t:'t5',name:'Hình tứ giác, đếm hình',tip:'Nhắc bé đếm số cạnh của từng hình; khi đếm hình ghép, đếm hình nhỏ trước rồi đến hình ghép và hình lớn.',extra:'Bổ sung bài ghép, cắt hình bằng giấy để tạo hình tứ giác.'},
+ {id:'dh',t:'t6',name:'Xem đồng hồ',tip:'Cho bé xem đồng hồ kim thật mỗi ngày: kim ngắn chỉ giờ, kim dài chỉ phút; kim dài chỉ số 3 là 15 phút, số 6 là 30 phút.',extra:'Bổ sung bài quay kim đồng hồ theo giờ cho trước.'},
+ {id:'ng',t:'t6',name:'Ngày – giờ, giờ – phút',tip:'Cùng bé lập thời gian biểu một ngày theo cách đọc 24 giờ (13 giờ, 14 giờ...).',extra:'Bổ sung bài tính khoảng thời gian giữa hai hoạt động trong ngày.'},
+ {id:'nt',t:'t6',name:'Ngày – tháng, xem lịch',tip:'Cho bé xem tờ lịch tháng ở nhà, tìm ngày sinh nhật và đọc thứ của ngày đó.',extra:'Bổ sung bài đếm số ngày giữa hai mốc trong cùng một tháng.'}
 ];
 const SKM={};SK.forEach(s=>SKM[s.id]=s);
 const LV={1:'Trung bình',2:'Khá',3:'Khó'};
@@ -355,6 +375,171 @@ const G={
    ex:['<b>Bài giải</b>',`Mẹ mua tất cả: ${a} + ${b} = ${s} (kg)`,`Mẹ còn lại: ${s} − ${c} = ${s-c} (kg)`,`Đáp số: ${s-c} kg.`]}}
 };
 
+/* ---------- Giai đoạn 2: hình minh họa ---------- */
+const carry1=()=>{const t=R(1,8),u=R(2,9);return[t*10+u,R(11-u,9)]};
+const carry2=()=>{const u1=R(2,9),u2=R(11-u1,9),t1=R(1,7),t2=R(1,8-t1);return[t1*10+u1,t2*10+u2]};
+const borrow1=()=>{const t=R(2,9),u=R(0,8);return[t*10+u,R(u+1,9)]};
+const borrow2=()=>{const t1=R(3,9),u1=R(0,8),u2=R(u1+1,9),t2=R(1,t1-2);return[t1*10+u1,t2*10+u2]};
+function exCong(a,b){const ua=a%10,ub=b%10,ta=Math.floor(a/10),tb=Math.floor(b/10),s=ua+ub,c=s>=10;
+  return[`Hàng đơn vị: ${ua} + ${ub} = ${s}, viết ${s%10}${c?', nhớ 1':''}.`,c?`Hàng chục: ${ta} + ${tb} = ${ta+tb}, thêm 1 bằng ${ta+tb+1}, viết ${ta+tb+1}.`:`Hàng chục: ${ta} + ${tb} = ${ta+tb}, viết ${ta+tb}.`,`Vậy ${a} + ${b} = ${a+b}.`]}
+function exTru(a,b){const ua=a%10,ub=b%10,ta=Math.floor(a/10),tb=Math.floor(b/10);
+  if(ua>=ub)return[`Hàng đơn vị: ${ua} − ${ub} = ${ua-ub}, viết ${ua-ub}.`,`Hàng chục: ${ta} − ${tb} = ${ta-tb}, viết ${ta-tb}.`,`Vậy ${a} − ${b} = ${a-b}.`];
+  return[`Hàng đơn vị: ${ua} không trừ được ${ub}, lấy ${ua+10} − ${ub} = ${ua+10-ub}, viết ${ua+10-ub}, nhớ 1.`,`Hàng chục: ${tb} thêm 1 bằng ${tb+1}; ${ta} − ${tb+1} = ${ta-tb-1}, viết ${ta-tb-1}.`,`Vậy ${a} − ${b} = ${a-b}.`]}
+function cot(a,b,op){return svg(100,98,`<text class="tx tc" x="84" y="28">${a}</text><text class="tx tc" x="84" y="58">${b}</text><text class="tx tc" style="text-anchor:middle" x="16" y="58">${op}</text><path class="ln" d="M6 67H94"/><text class="tx tc tcq" x="84" y="94">?</text>`,'Phép tính đặt theo cột dọc',1.5)}
+const LBL=[['A','B','C','D','E','G'],['M','N','P','Q','R','S'],['D','E','G','H','K','L']];
+const dot=(p,l)=>`<circle class="g-w" cx="${p[0]}" cy="${p[1]}" r="3.5"/><text class="tx" x="${p[0]}" y="${p[1]<52?p[1]-9:p[1]+19}">${l}</text>`;
+const pathD=(pts,closed)=>'M'+pts.map(p=>p[0]+' '+p[1]).join('L')+(closed?'Z':'');
+const extend=(p,q,k)=>{const dx=q[0]-p[0],dy=q[1]-p[1];return[[p[0]-dx*k,p[1]-dy*k],[q[0]+dx*k,q[1]+dy*k]]};
+function fig(pts,L,closed,extra,label){return svg(230,116,`<path class="ln" d="${pathD(pts,closed)}"/>`+(extra||'')+pts.map((p,i)=>dot(p,L[i])).join(''),label||'Hình vẽ các điểm và đoạn thẳng',1.5)}
+const zig=k=>{const hi=R(0,1);return Array.from({length:k+1},(_,i)=>[20+Math.round(i*190/k),(i%2===hi)?78:28+R(0,10)])};
+const SHP={tri1:[[30,6],[56,54],[4,54]],tri2:[[6,10],[54,30],[10,54]],sq:[[8,8],[52,8],[52,52],[8,52]],rect:[[2,16],[58,16],[58,46],[2,46]],trap:[[16,12],[44,12],[58,50],[2,50]],
+  para:[[16,12],[58,12],[44,50],[2,50]],rhom:[[30,4],[56,30],[30,56],[4,30]],irr:[[6,14],[40,6],[56,40],[14,54]],kite:[[30,4],[50,22],[30,56],[10,22]],pent:[[30,4],[56,24],[46,54],[14,54],[4,24]]};
+const QUADS=['sq','rect','trap','para','rhom','irr','kite'];
+const kind=n=>n==='circ'?'Hình tròn':n.startsWith('tri')?'Hình tam giác':n==='pent'?'Hình năm cạnh':'Hình tứ giác';
+const shape=(n,ox,oy)=>n==='circ'?`<circle class="sh" cx="${ox+30}" cy="${oy+30}" r="26"/>`:`<path class="sh" d="${pathD(SHP[n].map(p=>[p[0]+ox,p[1]+oy]),true)}"/>`;
+function clock(h,m){let s='<circle class="cf" cx="60" cy="60" r="55"/>';
+  for(let i=1;i<=12;i++){const a=i*Math.PI/6;s+=`<text class="tx tn" x="${(60+45*Math.sin(a)).toFixed(1)}" y="${(64.5-45*Math.cos(a)).toFixed(1)}">${i}</text>`}
+  const ha=((h%12)+m/60)*Math.PI/6,ma=m*Math.PI/30,e=(a,r)=>`${(60+r*Math.sin(a)).toFixed(1)} ${(60-r*Math.cos(a)).toFixed(1)}`;
+  return svg(120,120,s+`<path class="hh" d="M60 60L${e(ha,22)}"/><path class="mh" d="M60 60L${e(ma,35)}"/><circle class="g-w" cx="60" cy="60" r="3.5"/>`,'Mặt đồng hồ',1.7)}
+const THU=['Chủ nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+const MONTHS=[[9,2026],[10,2026],[11,2026],[12,2026],[1,2027],[2,2027],[3,2027],[4,2027],[5,2027]];
+const daysIn=(mo,yr)=>new Date(yr,mo,0).getDate(),thuOf=(d,mo,yr)=>THU[new Date(yr,mo-1,d).getDay()];
+function lich(mo,yr){const n=daysIn(mo,yr),first=(new Date(yr,mo-1,1).getDay()+6)%7,cw=38,ch=23,rows=Math.ceil((first+n)/7);
+  let s=`<rect class="cell" x="1" y="24" width="${cw*7-2}" height="${rows*ch+28}" rx="6"/><text class="tx" x="${cw*3.5}" y="17">Tháng ${mo}</text>`;
+  ['T2','T3','T4','T5','T6','T7','CN'].forEach((d,i)=>s+=`<text class="tx tn${i>4?' tr':''}" x="${cw*i+cw/2}" y="42">${d}</text>`);
+  for(let d=1;d<=n;d++){const k=first+d-1;s+=`<text class="tx tn${k%7>4?' tr':''}" x="${cw*(k%7)+cw/2}" y="${65+Math.floor(k/7)*ch}">${d}</text>`}
+  return svg(cw*7,rows*ch+56,s,'Tờ lịch tháng '+mo,1.6)}
+const buoi=H=>H<=18?'chiều':H<=21?'tối':'đêm';
+
+Object.assign(G,{
+ cn(l){
+  if(l===1){const[a,b]=carry1();return{t:`${a} + ${b} = ${box}`,vis:cot(a,b,'+'),kind:'num',ans:a+b,expr:`${a}+${b}`,ex:exCong(a,b)}}
+  if(l===2){const[a,b]=carry2();return{t:`${a} + ${b} = ${box}`,vis:cot(a,b,'+'),kind:'num',ans:a+b,expr:`${a}+${b}`,ex:exCong(a,b)}}
+  const[a,b]=carry2(),s=a+b;
+  if(R(0,1)){const c=R(1,Math.min(9,99-s));return{t:`${a} + ${b} + ${c} = ${box}`,kind:'num',ans:s+c,expr:`${a}+${b}+${c}`,ex:['Tính lần lượt từ trái sang phải.',`${a} + ${b} = ${s}.`,`${s} + ${c} = ${s+c}.`]}}
+  return{t:`${a} + ${box} = ${s}`,kind:'num',ans:b,expr:`${s}-${a}`,ex:['Muốn tìm số hạng chưa biết, lấy tổng trừ đi số hạng đã biết.',...exTru(s,a)]}},
+ tn(l){
+  if(l===1){const[a,b]=borrow1();return{t:`${a} − ${b} = ${box}`,vis:cot(a,b,'−'),kind:'num',ans:a-b,expr:`${a}-${b}`,ex:exTru(a,b)}}
+  if(l===2){const[a,b]=borrow2();return{t:`${a} − ${b} = ${box}`,vis:cot(a,b,'−'),kind:'num',ans:a-b,expr:`${a}-${b}`,ex:exTru(a,b)}}
+  const[a,b]=borrow2(),r=a-b;
+  if(R(0,1)){const c=R(1,Math.min(9,r));return{t:`${a} − ${b} − ${c} = ${box}`,kind:'num',ans:r-c,expr:`${a}-${b}-${c}`,ex:['Tính lần lượt từ trái sang phải.',`${a} − ${b} = ${r}.`,`${r} − ${c} = ${r-c}.`]}}
+  return{t:`${box} − ${b} = ${r}`,kind:'num',ans:a,expr:`${r}+${b}`,ex:['Muốn tìm số bị trừ, lấy hiệu cộng với số trừ.',...exCong(r,b)]}},
+ sc(l){
+  if(l===1){const[a,b]=carry1();return{t:`${a} + ${box} = ${a+b}`,kind:'num',ans:b,expr:`${a+b}-${a}`,ex:['Lấy tổng trừ đi số hạng đã biết.',`${a+b} − ${a} = ${b}.`]}}
+  if(l===2){const[a,b]=borrow2(),r=a-b;return{t:`${a} − ${box} = ${r}`,kind:'num',ans:b,expr:`${a}-${r}`,ex:['Lấy số bị trừ trừ đi hiệu.',`${a} − ${r} = ${b}.`]}}
+  const[a,b]=carry2(),[c,d]=borrow2(),x=a+b,y=c-d,g=x>y?'>':x<y?'<':'=';
+  return{t:`Chọn dấu thích hợp: ${a} + ${b} ${box} ${c} − ${d}`,kind:'mc',ch:['>','<','='],ans:g,cmp:[`${a}+${b}`,`${c}-${d}`],ex:[`${a} + ${b} = ${x}.`,`${c} − ${d} = ${y}.`,`${x} ${g} ${y}.`]}},
+ lv(l){
+  if(l===1){const[a,b]=carry2(),c=pick([['Lớp 2A trồng được','lớp 2B trồng được','cây','Cả hai lớp trồng được số cây là:','Hỏi cả hai lớp trồng được bao nhiêu cây?'],['Buổi sáng cửa hàng bán được','buổi chiều bán được','quyển vở','Cả hai buổi cửa hàng bán được số quyển vở là:','Hỏi cả hai buổi cửa hàng bán được bao nhiêu quyển vở?'],['Đàn gà nhà Mai có','đàn vịt có','con','Cả gà và vịt có số con là:','Hỏi nhà Mai có tất cả bao nhiêu con gà và vịt?']]);
+   return{t:`${c[0]} ${a} ${c[2]}, ${c[1]} ${b} ${c[2]}. ${c[4]}`,kind:'num',ans:a+b,expr:`${a}+${b}`,unit:c[2],ex:giai(c[3],`${a} + ${b} = ${a+b} (${c[2]})`,`${a+b} ${c[2]}`)}}
+  if(l===2){const[a,b]=borrow2();return R(0,1)?{t:`Cửa hàng có ${a} quả bóng, đã bán ${b} quả bóng. Hỏi cửa hàng còn lại bao nhiêu quả bóng?`,kind:'num',ans:a-b,expr:`${a}-${b}`,unit:'quả bóng',ex:giai('Cửa hàng còn lại số quả bóng là:',`${a} − ${b} = ${a-b} (quả bóng)`,`${a-b} quả bóng`)}
+   :{t:`Nam có ${a} viên bi. Việt có ít hơn Nam ${b} viên bi. Hỏi Việt có bao nhiêu viên bi?`,kind:'num',ans:a-b,expr:`${a}-${b}`,unit:'viên bi',ex:giai('Việt có số viên bi là:',`${a} − ${b} = ${a-b} (viên bi)`,`${a-b} viên bi`)}}
+  if(R(0,1)){const a=R(15,38),b=R(4,15);return{t:`Thùng thứ nhất có ${a} quyển vở. Thùng thứ hai có nhiều hơn thùng thứ nhất ${b} quyển vở. Hỏi cả hai thùng có bao nhiêu quyển vở?`,kind:'num',ans:2*a+b,expr:`${a}+${a}+${b}`,unit:'quyển vở',
+   ex:['<b>Bài giải</b>',`Thùng thứ hai có: ${a} + ${b} = ${a+b} (quyển vở)`,`Cả hai thùng có: ${a} + ${a+b} = ${2*a+b} (quyển vở)`,`Đáp số: ${2*a+b} quyển vở.`]}}
+  const[a,b]=borrow2(),r=a-b,c=R(2,Math.min(9,r-1));return{t:`Bác Tư có ${a} quả trứng. Buổi sáng bác bán ${b} quả, buổi chiều bác bán thêm ${c} quả. Hỏi bác Tư còn lại bao nhiêu quả trứng?`,kind:'num',ans:r-c,expr:`${a}-${b}-${c}`,unit:'quả trứng',
+   ex:['<b>Bài giải</b>',`Sau buổi sáng còn lại: ${a} − ${b} = ${r} (quả trứng)`,`Sau buổi chiều còn lại: ${r} − ${c} = ${r-c} (quả trứng)`,`Đáp số: ${r-c} quả trứng.`]}},
+ dd(l){
+  const L=pick(LBL);
+  if(l===1){if(R(0,1)){const n=R(3,6),sp=shuf([[30,30],[80,80],[120,25],[170,75],[205,30],[55,55]]).slice(0,n);
+    return{t:'Hình vẽ có mấy điểm?',vis:svg(230,116,sp.map((p,i)=>dot(p,L[i])).join(''),'Các điểm được đặt tên',1.5),pv:`các điểm ${L.slice(0,n).join(', ')}`,kind:'num',ans:n,ex:[`Các điểm là: ${L.slice(0,n).join(', ')}.`,`Có ${n} điểm.`]}}
+   const a=R(3,12);let b=R(3,12);if(b===a)b=a===12?11:a+1;const dai=R(0,1),s1=L[0]+L[1],s2=L[2]+L[3],ans=(dai?a>b:a<b)?s1:s2;
+   return{t:`Đoạn thẳng ${s1} dài ${a} cm, đoạn thẳng ${s2} dài ${b} cm. Đoạn thẳng nào ${dai?'dài':'ngắn'} hơn?`,kind:'mc',ch:[s1,s2],ans,
+    vis:svg(230,116,`<path class="ln" d="M20 34H${20+a*15}M20 84H${20+b*15}"/>`+dot([20,34],L[0])+dot([20+a*15,34],L[1])+dot([20,84],L[2])+dot([20+b*15,84],L[3]),'Hai đoạn thẳng',1.5),
+    ex:[`So sánh hai số đo: ${a} cm ${a>b?'>':'<'} ${b} cm.`,`Đoạn thẳng ${ans} ${dai?'dài':'ngắn'} hơn.`]}}
+  if(l===2){const ty=pick(['tri','quad','quad+','pent','pent+']),pts={tri:[[30,92],[115,20],[200,92]],quad:[[30,90],[62,24],[180,24],[200,90]],pent:[[45,92],[28,50],[115,18],[202,50],[185,92]]}[ty.replace('+','')],
+    n=pts.length,dg=ty.endsWith('+'),segs=pts.map((_,i)=>L[i]+L[(i+1)%n]);if(dg)segs.push(L[0]+L[2]);
+   return{t:'Hình vẽ có mấy đoạn thẳng?',vis:fig(pts,L,true,dg?`<path class="ln" d="${pathD([pts[0],pts[2]])}"/>`:''),pv:`hình ${n} điểm ${L.slice(0,n).join('')}${dg?', có nối '+L[0]+L[2]:''}`,kind:'num',ans:segs.length,ex:[`Các đoạn thẳng là: ${segs.join(', ')}.`,`Có ${segs.length} đoạn thẳng.`]}}
+  if(R(0,1)){const n=R(3,5),pts=Array.from({length:n},(_,i)=>[25+Math.round(i*180/(n-1)),58]),segs=[];for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)segs.push(L[i]+L[j]);
+   return{t:`Trên một đoạn thẳng có ${n} điểm như hình vẽ. Hình vẽ có tất cả mấy đoạn thẳng?`,vis:fig(pts,L,false),pv:`${n} điểm ${L.slice(0,n).join(', ')} thẳng hàng`,kind:'num',ans:segs.length,ex:['Đếm cả đoạn thẳng ngắn và đoạn thẳng ghép từ nhiều đoạn ngắn.',`Các đoạn thẳng là: ${segs.join(', ')}.`,`Có ${segs.length} đoạn thẳng.`]}}
+  const[a,b]=cross(),xb=25+Math.round(180*a/(a+b));
+  return{t:`Điểm ${L[1]} nằm trên đoạn thẳng ${L[0]}${L[2]}. Đoạn thẳng ${L[0]}${L[1]} dài ${a} cm, đoạn thẳng ${L[1]}${L[2]} dài ${b} cm. Đoạn thẳng ${L[0]}${L[2]} dài bao nhiêu xăng-ti-mét?`,
+   vis:fig([[25,58],[xb,58],[205,58]],L,false,`<text class="tx tn" x="${(25+xb)/2}" y="46">${a} cm</text><text class="tx tn" x="${(xb+205)/2}" y="46">${b} cm</text>`),kind:'num',ans:a+b,expr:`${a}+${b}`,unit:'cm',
+   ex:[`Độ dài ${L[0]}${L[2]} bằng tổng độ dài ${L[0]}${L[1]} và ${L[1]}${L[2]}.`,`${a} + ${b} = ${a+b} (cm).`]}},
+ dc(l){
+  const L=pick(LBL),base=pick([[[40,84],[190,28]],[[40,30],[190,82]],[[40,58],[190,58]]]),mid=[(base[0][0]+base[1][0])/2,(base[0][1]+base[1][1])/2],ln=p=>`<path class="ln" d="${pathD(extend(p[0],p[1],0.18))}"/>`;
+  if(l===1){const ty=pick(['Đoạn thẳng','Đường thẳng','Đường cong']),cv=R(0,2),bi=base[0][1]+'-'+base[1][1];
+   const v=ty==='Đường cong'?svg(230,116,`<path class="ln" d="${['M20 80Q70 0 115 55T210 40','M20 30Q60 110 115 60T210 80','M20 60Q65 10 115 60T210 60'][cv]}"/>`,'Một đường vẽ',1.5)
+    :svg(230,116,(ty==='Đường thẳng'?ln(base):`<path class="ln" d="${pathD(base)}"/>`)+dot(base[0],L[0])+dot(base[1],L[1]),'Một đường vẽ qua hai điểm',1.5);
+   return{t:'Hình vẽ là đoạn thẳng, đường thẳng hay đường cong?',vis:v,pv:ty==='Đường cong'?'đường cong kiểu '+(cv+1):`${ty.toLowerCase()} ${L[0]}${L[1]} (${bi})`,kind:'mc',ch:['Đoạn thẳng','Đường thẳng','Đường cong'],ans:ty,
+    ex:[ty==='Đoạn thẳng'?`Hình vẽ nối hai điểm ${L[0]} và ${L[1]}, dừng lại ở hai điểm đó nên là đoạn thẳng ${L[0]}${L[1]}.`:ty==='Đường thẳng'?`Hình vẽ đi qua hai điểm ${L[0]}, ${L[1]} và kéo dài về hai phía nên là đường thẳng ${L[0]}${L[1]}.`:'Đường vẽ uốn lượn, không thẳng nên là đường cong.']}}
+  if(l===2){const off=pick([0,0,-30,30]),m=[mid[0],mid[1]+off],pts=[base[0],m,base[1]];
+   return{t:`Ba điểm ${L[0]}, ${L[1]}, ${L[2]} có thẳng hàng không?`,vis:svg(230,116,ln(base)+pts.map((p,i)=>dot(p,L[i])).join(''),'Ba điểm và một đường thẳng',1.5),pv:`${L[0]}${L[1]}${L[2]}, điểm giữa lệch ${off}, kiểu ${base[0][1]}-${base[1][1]}`,kind:'mc',ch:['Có','Không'],ans:off?'Không':'Có',
+    ex:['Ba điểm cùng nằm trên một đường thẳng thì thẳng hàng.',off?`Điểm ${L[1]} không nằm trên đường thẳng ${L[0]}${L[2]} nên ba điểm không thẳng hàng.`:`Cả ba điểm cùng nằm trên một đường thẳng nên ba điểm thẳng hàng.`]}}
+  const ord=shuf([0,1,2,3]),N=ord.map(i=>L[i]),ex4=[mid[0]+pick([-45,45]),mid[1]+(mid[1]>58?-34:34)],pts=[base[0],mid,base[1],ex4],tri=x=>x.slice().sort().join(', ');
+  const all=[[0,1,2],[0,1,3],[0,2,3],[1,2,3]].map(ix=>tri(ix.map(i=>N[i])));
+  return{t:'Trong hình vẽ, ba điểm nào thẳng hàng?',vis:svg(230,116,ln(base)+`<path class="ln" d="${pathD(extend(mid,ex4,0.25))}"/>`+pts.map((p,i)=>dot(p,N[i])).join(''),'Bốn điểm và hai đường thẳng',1.5),pv:`bốn điểm ${N.join(', ')}; kiểu ${base[0][1]}-${base[1][1]}`,kind:'mc',ch:shuf(all),ans:all[0],
+   ex:['Tìm ba điểm cùng nằm trên một đường thẳng.',`Ba điểm ${all[0]} cùng nằm trên một đường thẳng nên thẳng hàng.`]}},
+ gk(l){
+  const L=pick(LBL),mk=(k,len)=>{const pts=zig(k),nm=L.slice(0,k+1).join('');let x='';if(len)for(let i=0;i<k;i++)if(len[i]!=null)x+=`<text class="tx tn" x="${(pts[i][0]+pts[i+1][0])/2+(pts[i+1][1]<pts[i][1]?-24:24)}" y="${(pts[i][1]+pts[i+1][1])/2-7}">${len[i]} cm</text>`;return{nm,vis:fig(pts,L,false,x,'Đường gấp khúc')}},seg=(i)=>L[i]+L[i+1];
+  if(l===1){const k=R(2,5),f=mk(k);return{t:`Đường gấp khúc ${f.nm} gồm mấy đoạn thẳng?`,vis:f.vis,kind:'num',ans:k,ex:[`Các đoạn thẳng là: ${Array.from({length:k},(_,i)=>seg(i)).join(', ')}.`,`Đường gấp khúc ${f.nm} gồm ${k} đoạn thẳng.`]}}
+  if(l===2){const k=R(2,3),len=Array.from({length:k},()=>R(2,9)),s=len.reduce((x,y)=>x+y,0),f=mk(k,len);
+   return{t:`Đường gấp khúc ${f.nm} có ${len.map((v,i)=>`${seg(i)} = ${v} cm`).join(', ')}. Độ dài đường gấp khúc ${f.nm} là bao nhiêu xăng-ti-mét?`,vis:f.vis,kind:'num',ans:s,expr:len.join('+'),unit:'cm',ex:['Độ dài đường gấp khúc bằng tổng độ dài các đoạn thẳng của nó.',`${len.join(' + ')} = ${s} (cm).`]}}
+  const v=R(0,2);
+  if(v===0){const len=Array.from({length:4},()=>R(2,9)),s=len.reduce((x,y)=>x+y,0),f=mk(4,len);
+   return{t:`Đường gấp khúc ${f.nm} có ${len.map((x,i)=>`${seg(i)} = ${x} cm`).join(', ')}. Độ dài đường gấp khúc ${f.nm} là bao nhiêu xăng-ti-mét?`,vis:f.vis,kind:'num',ans:s,expr:len.join('+'),unit:'cm',ex:['Độ dài đường gấp khúc bằng tổng độ dài các đoạn thẳng của nó.',`${len.join(' + ')} = ${s} (cm).`]}}
+  if(v===1){const len=[R(3,9),R(3,9),R(3,9)],s=len[0]+len[1]+len[2],f=mk(3,[len[0],len[1],null]);
+   return{t:`Đường gấp khúc ${f.nm} dài ${s} cm, trong đó ${seg(0)} = ${len[0]} cm, ${seg(1)} = ${len[1]} cm. Đoạn thẳng ${seg(2)} dài bao nhiêu xăng-ti-mét?`,vis:f.vis,kind:'num',ans:len[2],expr:`${s}-${len[0]}-${len[1]}`,unit:'cm',
+    ex:[`Hai đoạn đã biết dài: ${len[0]} + ${len[1]} = ${len[0]+len[1]} (cm).`,`Đoạn ${seg(2)} dài: ${s} − ${len[0]+len[1]} = ${len[2]} (cm).`]}}
+  const k=R(3,4),d=R(3,9),f=mk(k,Array(k).fill(d));
+  return{t:`Đường gấp khúc ${f.nm} gồm ${k} đoạn thẳng, mỗi đoạn dài ${d} cm. Độ dài đường gấp khúc ${f.nm} là bao nhiêu xăng-ti-mét?`,vis:f.vis,kind:'num',ans:k*d,expr:Array(k).fill(d).join('+'),unit:'cm',ex:['Cộng độ dài các đoạn thẳng bằng nhau.',`${Array(k).fill(d).join(' + ')} = ${k*d} (cm).`]}},
+ tg(l){
+  if(l===1){const n=pick(['tri1','tri2','circ',...QUADS]),k=kind(n);return{t:'Hình bên là hình gì?',vis:svg(64,64,shape(n,2,2),'Một hình phẳng',2),pv:'kiểu '+n,kind:'mc',ch:['Hình tam giác','Hình tứ giác','Hình tròn'],ans:k,
+   ex:[k==='Hình tứ giác'?'Hình có 4 cạnh và 4 đỉnh là hình tứ giác.':k==='Hình tam giác'?'Hình có 3 cạnh và 3 đỉnh là hình tam giác.':'Hình tròn không có cạnh thẳng.']}}
+  if(l===2){let s;do{s=Array.from({length:6},()=>pick(['tri1','tri2','circ','pent',...QUADS]))}while(!s.some(x=>QUADS.includes(x))||new Set(s).size<5);const c=s.filter(x=>QUADS.includes(x)).length;
+   return{t:'Trong hình vẽ có mấy hình tứ giác?',vis:svg(396,64,s.map((x,i)=>shape(x,3+i*66,2)).join(''),'Sáu hình phẳng xếp thành hàng',1.4),pv:s.join(' '),kind:'num',ans:c,ex:['Hình tứ giác là hình có 4 cạnh.',`Từ trái sang phải, các hình thứ ${s.map((x,i)=>QUADS.includes(x)?i+1:0).filter(Boolean).join(', ')} là hình tứ giác.`,`Có ${c} hình tứ giác.`]}}
+  const RC='M20 14H200V98H20Z',TR='M110 12L20 100H200Z',V=pick([
+   ['một đoạn thẳng đứng chia đôi hình chữ nhật',RC+'M110 14V98','tứ giác',3,'Có 2 hình tứ giác nhỏ và 1 hình tứ giác lớn (cả hình): 2 + 1 = 3.'],
+   ['một đoạn thẳng nằm ngang chia đôi hình chữ nhật',RC+'M20 56H200','tứ giác',3,'Có 2 hình tứ giác nhỏ và 1 hình tứ giác lớn (cả hình): 2 + 1 = 3.'],
+   ['hai đoạn thẳng đứng chia hình chữ nhật thành ba phần',RC+'M80 14V98M140 14V98','tứ giác',6,'Có 3 hình nhỏ, 2 hình ghép từ hai hình nhỏ liền nhau và 1 hình lớn: 3 + 2 + 1 = 6.'],
+   ['hai đoạn thẳng nằm ngang chia hình chữ nhật thành ba phần',RC+'M20 42H200M20 70H200','tứ giác',6,'Có 3 hình nhỏ, 2 hình ghép từ hai hình nhỏ liền nhau và 1 hình lớn: 3 + 2 + 1 = 6.'],
+   ['một đoạn thẳng đứng và một đoạn nằm ngang chia hình chữ nhật thành bốn phần',RC+'M110 14V98M20 56H200','tứ giác',9,'Có 4 hình nhỏ, 4 hình ghép từ hai hình nhỏ liền nhau và 1 hình lớn: 4 + 4 + 1 = 9.'],
+   ['hình chữ nhật có một đường chéo',RC+'M20 14L200 98','tứ giác',1,'Chỉ có 1 hình tứ giác là cả hình; hai phần bên trong đều là hình tam giác.'],
+   ['hình chữ nhật có một đường chéo',RC+'M20 14L200 98','tam giác',2,'Đường chéo chia hình chữ nhật thành 2 hình tam giác.'],
+   ['hình chữ nhật có hai đường chéo',RC+'M20 14L200 98M200 14L20 98','tam giác',8,'Có 4 hình tam giác nhỏ và 4 hình tam giác ghép từ hai hình nhỏ liền nhau: 4 + 4 = 8.'],
+   ['hình tam giác có một đoạn thẳng nối đỉnh với cạnh đáy',TR+'M110 12V100','tam giác',3,'Có 2 hình tam giác nhỏ và 1 hình tam giác lớn (cả hình): 2 + 1 = 3.'],
+   ['hình tam giác có hai đoạn thẳng nối đỉnh với cạnh đáy',TR+'M110 12L80 100M110 12L140 100','tam giác',6,'Có 3 hình nhỏ, 2 hình ghép từ hai hình nhỏ liền nhau và 1 hình lớn: 3 + 2 + 1 = 6.']]);
+  return{t:`Hình vẽ có tất cả mấy hình ${V[2]}?`,vis:svg(220,112,`<path class="sh" d="${V[1]}"/>`,'Một hình được chia thành nhiều phần',1.5),pv:V[0],kind:'num',ans:V[3],ex:['Đếm cả hình nhỏ, hình ghép và hình lớn.',V[4]]}},
+ dh(l){
+  const h=R(1,12);
+  if(l===1)return{t:'Đồng hồ chỉ mấy giờ?',vis:clock(h,0),pv:`kim giờ chỉ số ${h}, kim phút chỉ số 12`,kind:'num',ans:h,unit:'giờ',ex:[`Kim phút chỉ số 12, kim giờ chỉ số ${h}.`,`Đồng hồ chỉ ${h} giờ.`]};
+  if(l===2){const m=pick([15,30]),h2=h%12+1,f=(a,b)=>`${a} giờ ${b} phút`;return{t:'Đồng hồ chỉ mấy giờ?',vis:clock(h,m),pv:`kim giờ vừa qua số ${h}, kim phút chỉ số ${m/5}`,kind:'mc',ch:shuf([f(h,15),f(h,30),f(h2,15),f(h2,30)]),ans:f(h,m),
+   ex:[`Kim phút chỉ số ${m/5}, tức là ${m} phút.`,`Kim giờ vừa đi qua số ${h}.`,`Đồng hồ chỉ ${f(h,m)}${m===30?`, còn đọc là ${h} giờ rưỡi`:''}.`]}}
+  if(R(0,1)){const hh=R(1,11),H=hh+12;return{t:`Vào buổi ${buoi(H)}, đồng hồ chỉ như hình vẽ. Lúc đó là mấy giờ theo cách đọc 24 giờ?`,vis:clock(hh,0),pv:`kim giờ chỉ số ${hh}, kim phút chỉ số 12`,kind:'num',ans:H,expr:`${hh}+12`,unit:'giờ',
+   ex:[`Đồng hồ chỉ ${hh} giờ ${buoi(H)}.`,`Sau 12 giờ trưa, lấy số giờ cộng thêm 12: ${hh} + 12 = ${H}.`,`Lúc đó là ${H} giờ.`]}}
+  const H=R(13,23);return{t:`${H} giờ còn gọi là mấy giờ ${buoi(H)}?`,kind:'num',ans:H-12,expr:`${H}-12`,unit:'giờ',ex:['Từ 13 giờ trở đi, lấy số giờ trừ đi 12.',`${H} − 12 = ${H-12}.`,`${H} giờ còn gọi là ${H-12} giờ ${buoi(H)}.`]}},
+ ng(l){
+  const[N,act]=pick([['Mai','học bài'],['Nam','đá bóng'],['Việt','vẽ tranh'],['Mi','tập đàn']]);
+  if(l===1){const v=R(0,4);
+   if(v===0)return{t:`1 giờ = ${box} phút`,kind:'num',ans:60,unit:'phút',ex:['Kim phút quay một vòng hết 60 phút.','1 giờ = 60 phút.']};
+   if(v===1)return{t:`1 ngày = ${box} giờ`,kind:'num',ans:24,unit:'giờ',ex:['Một ngày tính từ 12 giờ đêm hôm trước đến 12 giờ đêm hôm sau.','1 ngày = 24 giờ.']};
+   if(v===2)return{t:'Một tuần lễ có mấy ngày?',kind:'num',ans:7,unit:'ngày',ex:['Một tuần lễ gồm: Thứ Hai, Thứ Ba, Thứ Tư, Thứ Năm, Thứ Sáu, Thứ Bảy, Chủ nhật.','Một tuần lễ có 7 ngày.']};
+   if(v===3){const H=R(13,23);return{t:`${H} giờ còn gọi là mấy giờ ${buoi(H)}?`,kind:'num',ans:H-12,expr:`${H}-12`,unit:'giờ',ex:['Từ 13 giờ trở đi, lấy số giờ trừ đi 12.',`${H} − 12 = ${H-12}.`]}}
+   const h=R(1,6);return{t:`${h} giờ chiều còn gọi là mấy giờ?`,kind:'num',ans:h+12,expr:`${h}+12`,unit:'giờ',ex:['Buổi chiều, lấy số giờ cộng thêm 12.',`${h} + 12 = ${h+12}.`]}}
+  if(l===2){const v=R(0,2),s=R(6,8);
+   if(v===0){const d=R(1,3);return{t:`${N} bắt đầu ${act} lúc ${s} giờ sáng và ${act} trong ${d} giờ. Hỏi ${N} ${act} xong lúc mấy giờ?`,kind:'num',ans:s+d,expr:`${s}+${d}`,unit:'giờ',ex:[`Lấy giờ bắt đầu cộng với thời gian ${act}.`,`${s} + ${d} = ${s+d}.`,`${N} ${act} xong lúc ${s+d} giờ.`]}}
+   if(v===1){const e=s+R(1,4);return{t:`${N} ${act} từ ${s} giờ đến ${e} giờ sáng. Hỏi ${N} ${act} trong bao nhiêu giờ?`,kind:'num',ans:e-s,expr:`${e}-${s}`,unit:'giờ',ex:['Lấy giờ kết thúc trừ đi giờ bắt đầu.',`${e} − ${s} = ${e-s} (giờ).`]}}
+   const m=pick([15,30,45]);return{t:`${N} ${act} từ ${s} giờ đến ${s} giờ ${m} phút. Hỏi ${N} ${act} trong bao nhiêu phút?`,kind:'num',ans:m,unit:'phút',ex:[`Từ ${s} giờ đúng đến ${s} giờ ${m} phút, kim phút đi được ${m} phút.`,`${N} ${act} trong ${m} phút.`]}}
+  const v=R(0,3);
+  if(v===0){const s=R(6,8),e=R(16,18);return{t:`Bố đi làm lúc ${s} giờ sáng và về đến nhà lúc ${e} giờ. Hỏi bố vắng nhà bao nhiêu giờ?`,kind:'num',ans:e-s,expr:`${e}-${s}`,unit:'giờ',ex:['Lấy giờ về trừ đi giờ đi.',`${e} − ${s} = ${e-s} (giờ).`]}}
+  if(v===1){const m=pick([15,30]);return{t:`1 giờ ${m} phút = ${box} phút`,kind:'num',ans:60+m,expr:`60+${m}`,unit:'phút',ex:['1 giờ = 60 phút.',`60 + ${m} = ${60+m} (phút).`]}}
+  if(v===2){const h=R(1,5),d=R(2,5);return{t:`Bây giờ là ${h} giờ chiều. Sau ${d} giờ nữa là mấy giờ theo cách đọc 24 giờ?`,kind:'num',ans:12+h+d,expr:`12+${h}+${d}`,unit:'giờ',ex:[`${h} giờ chiều là ${h} + 12 = ${h+12} giờ.`,`${h+12} + ${d} = ${12+h+d}.`,`Lúc đó là ${12+h+d} giờ.`]}}
+  const H=R(18,21);return{t:`Bộ phim bắt đầu lúc ${H} giờ và kéo dài 2 giờ. Hỏi bộ phim kết thúc lúc mấy giờ ${buoi(H+2)}?`,kind:'num',ans:H+2-12,expr:`${H}+2-12`,unit:'giờ',ex:[`Bộ phim kết thúc lúc: ${H} + 2 = ${H+2} (giờ).`,`${H+2} giờ còn gọi là ${H+2} − 12 = ${H-10} giờ ${buoi(H+2)}.`]}},
+ nt(l){
+  const[mo,yr]=pick(MONTHS),n=daysIn(mo,yr);
+  if(l===1){const m=pick([1,3,4,5,6,7,8,9,10,11,12]),d=daysIn(m,2027);return{t:`Tháng ${m} có bao nhiêu ngày?`,kind:'mc',ch:['30 ngày','31 ngày'],ans:d+' ngày',ex:['Các tháng 1, 3, 5, 7, 8, 10, 12 có 31 ngày.','Các tháng 4, 6, 9, 11 có 30 ngày.',`Tháng ${m} có ${d} ngày.`]}}
+  if(l===2){const v=R(0,2);
+   if(v===0){const d=R(1,n),th=thuOf(d,mo,yr),ch=shuf([th,...shuf(THU.filter(x=>x!==th)).slice(0,3)]);return{t:`Xem tờ lịch tháng ${mo}. Ngày ${d} tháng ${mo} là thứ mấy?`,vis:lich(mo,yr),kind:'mc',ch,ans:th,ex:[`Tìm số ${d} trên tờ lịch rồi dóng lên hàng ghi thứ.`,`Ngày ${d} tháng ${mo} là ${th}.`]}}
+   if(v===1){const w=pick([6,0]),ds=[];for(let d=1;d<=n;d++)if(new Date(yr,mo-1,d).getDay()===w)ds.push(d);return{t:`Xem tờ lịch tháng ${mo}. Tháng ${mo} có mấy ngày ${THU[w]}?`,vis:lich(mo,yr),kind:'num',ans:ds.length,ex:[`Các ngày ${THU[w]} trong tháng ${mo} là: ${ds.join(', ')}.`,`Có ${ds.length} ngày ${THU[w]}.`]}}
+   const w=R(1,6);let d=1;while(new Date(yr,mo-1,d).getDay()!==w)d++;return{t:`Xem tờ lịch tháng ${mo}. ${THU[w]} đầu tiên của tháng ${mo} là ngày mấy?`,vis:lich(mo,yr),kind:'num',ans:d,ex:[`Nhìn cột ${THU[w]}, số đầu tiên từ trên xuống là ${d}.`,`${THU[w]} đầu tiên của tháng ${mo} là ngày ${d}.`]}}
+  const v=R(0,3);
+  if(v===0){const d=R(1,n-7),th=thuOf(d,mo,yr);return{t:`Hôm nay là ${th}, ngày ${d} tháng ${mo}. ${th} tuần sau là ngày mấy tháng ${mo}?`,kind:'num',ans:d+7,expr:`${d}+7`,ex:['Một tuần lễ có 7 ngày.',`${d} + 7 = ${d+7}.`,`${th} tuần sau là ngày ${d+7} tháng ${mo}.`]}}
+  if(v===1){const d=R(1,n-14),k=pick([7,14]),th=thuOf(d,mo,yr),ch=shuf([th,...shuf(THU.filter(x=>x!==th)).slice(0,3)]);return{t:`Ngày ${d} tháng ${mo} là ${th}. Ngày ${d+k} tháng ${mo} là thứ mấy?`,kind:'mc',ch,ans:th,ex:[`Từ ngày ${d} đến ngày ${d+k} là ${k} ngày, tức là đúng ${k/7} tuần.`,`Sau đúng ${k/7} tuần thì thứ không đổi: ngày ${d+k} cũng là ${th}.`]}}
+  if(v===2){let d=R(1,n-10);while(new Date(yr,mo-1,d).getDay()!==1)d++;
+   return{t:`Hôm nay là Thứ Hai, ngày ${d} tháng ${mo}. Thứ Sáu tuần này là ngày mấy tháng ${mo}?`,kind:'num',ans:d+4,expr:`${d}+4`,ex:['Từ Thứ Hai đến Thứ Sáu là 4 ngày.',`${d} + 4 = ${d+4}.`,`Thứ Sáu tuần này là ngày ${d+4} tháng ${mo}.`]}}
+  let d=R(3,n-6);while(new Date(yr,mo-1,d).getDay()!==3)d++;
+  return{t:`Hôm nay là Thứ Tư, ngày ${d} tháng ${mo}. Thứ Hai tuần này là ngày mấy tháng ${mo}?`,kind:'num',ans:d-2,expr:`${d}-2`,ex:['Từ Thứ Hai đến Thứ Tư là 2 ngày.',`${d} − 2 = ${d-2}.`,`Thứ Hai tuần này là ngày ${d-2} tháng ${mo}.`]}}
+});
+
 /* ---------- Dữ liệu kết quả ---------- */
 const fresh=()=>({v:1,u:0,stars:0,skills:{},miss:[],days:[]});
 let S=fresh();
@@ -371,6 +556,10 @@ function streak(){let n=0;const d=new Date();if(!S.days.includes(dayKey(d)))d.se
 function weakList(){return SK.map(s=>({s,st:stat(s.id)})).filter(x=>x.st.n>=3&&x.st.acc<80).sort((a,b)=>a.st.acc-b.st.acc)}
 function weakLevel(id){let best=1,low=101;for(const l of[1,2,3]){const st=stat(id,l);if(st.n&&st.acc<low){low=st.acc;best=l}}return best}
 
+const HH=['','Đồng','Bạc','Vàng'];
+function badge(tid){const ss=SK.filter(s=>s.t===tid).map(s=>({a:stat(s.id),h:stat(s.id,3)}));
+  if(!ss.every(x=>x.a.n>=8))return 0;if(!ss.every(x=>x.a.acc>=85))return 1;return ss.every(x=>x.h.n>=5&&x.h.acc>=80)?3:2}
+const badges=()=>{const o={};TOPICS.forEach(t=>o[t.id]=badge(t.id));return o};
 if(typeof module!=='undefined')module.exports={G,SK,TOPICS};
 if(typeof document!=='undefined'){
 let P=null,cur='home',writing=false,dirty=false,timer=null,syncMsg='Đang kết nối nơi lưu kết quả…',askReset=false,queue=[];
@@ -390,7 +579,7 @@ fetch(API+'?api=load').then(r=>r.json()).then(j=>{try{const r=norm(JSON.parse((j
       if(r.u>S.u){S=r;saveLocal();if(cur!=='prac')render()}else if(S.u>r.u||queue.length){dirty=true;push()}}catch(e){}
     setSync(MSG_OK)}).catch(()=>setSync(MSG_LOCAL));
 
-function rec(q,ok,given){if(q.redo)return;const plain=q.t.replace(/<[^>]+>/g,'')+(q.pv?' ['+q.pv+']':'');queue.push({d:Date.now(),s:q.sk,l:q.lv,q:plain,a:String(given),r:String(q.ans),ok:ok?1:0});const k=S.skills[q.sk]||(S.skills[q.sk]={}),a=k['l'+q.lv]||(k['l'+q.lv]=[0,0]);a[0]++;
+function rec(q,ok,given){if(q.redo)return;const plain=q.t.replace(/<[^>]+>/g,'')+(q.pv?' ['+q.pv+']':'');queue.push({d:Date.now(),s:q.sk,tn:(TOPICS.findIndex(t=>t.id===SKM[q.sk].t)+1)+'. '+TOPICS.find(t=>t.id===SKM[q.sk].t).name,sn:SKM[q.sk].name,l:q.lv,q:plain,a:String(given),r:String(q.ans),ok:ok?1:0});const k=S.skills[q.sk]||(S.skills[q.sk]={}),a=k['l'+q.lv]||(k['l'+q.lv]=[0,0]);a[0]++;
   if(ok){a[1]++;S.stars+=q.lv}
   else{S.miss.unshift({s:q.sk,l:q.lv,q:q.t.replace(/<[^>]+>/g,'')+(q.pv?' ['+q.pv+']':''),a:String(given),r:String(q.ans),d:Date.now()});S.miss=S.miss.slice(0,40)}
   const d=dayKey();if(!S.days.includes(d)){S.days.push(d);S.days=S.days.slice(-90)}
@@ -400,6 +589,8 @@ function rec(q,ok,given){if(q.redo)return;const plain=q.t.replace(/<[^>]+>/g,'')
 const ICON={1:'<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="currentColor"/></svg>',
  2:'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l9 9-9 9-9-9z" fill="currentColor"/></svg>',
  3:'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l9.5 17.5h-19z" fill="currentColor"/><path d="M10 7v6" stroke="var(--surface)" stroke-width="2.2" stroke-linecap="round"/><circle cx="10" cy="15.6" r="1.3" fill="var(--surface)"/></svg>'};
+const MED=b=>`<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M6 1h10l-3 8H9z" fill="var(--brand)"/><circle class="m${b}" cx="11" cy="14" r="7"/><circle cx="11" cy="14" r="3.4" fill="none" stroke="var(--surface)" stroke-width="1.4"/></svg>`;
+const medal=b=>b?`<span class="medal">${MED(b)}Huy hiệu ${HH[b]}</span>`:'<span class="medal none">Chưa có huy hiệu</span>';
 const lvTag=l=>`<span class="lv lv${l}">${ICON[l]}${LV[l]}</span>`;
 const WISH=['Chúc Hà Vy học thật vui và làm bài thật giỏi!','Mỗi ngày một chút, Hà Vy sẽ giỏi Toán hơn mỗi ngày!','Ba mẹ luôn tự hào về sự chăm chỉ của Hà Vy.','Sai một câu không sao cả, mình làm lại là sẽ nhớ lâu hơn!','Hà Vy cứ bình tĩnh đọc kỹ đề, con sẽ làm được!','Hôm nay Hà Vy thử chinh phục một bài mức Khó nhé!','Chăm học hôm nay, giỏi giang ngày mai. Cố lên Hà Vy!','Cả nhà tin Hà Vy làm được. Bắt đầu thôi nào!','Chúc Hà Vy hái thật nhiều ngôi sao hôm nay!','Toán học rất thú vị, Hà Vy cùng khám phá nhé!'];
 const PRAISE=['Chính xác! Hà Vy giỏi quá!','Đúng rồi! Con làm rất tốt!','Tuyệt vời! Con tiếp tục phát huy nhé!','Giỏi lắm! Đáp án hoàn toàn đúng!'];
@@ -408,22 +599,25 @@ function hello(){const d=new Date(),h=d.getHours(),bd=d.getDate()===30&&d.getMon
   const hi=bd?'Chúc mừng sinh nhật Hà Vy!':h<11?'Chào buổi sáng, Hà Vy!':h<14?'Chào buổi trưa, Hà Vy!':h<18?'Chào buổi chiều, Hà Vy!':'Chào buổi tối, Hà Vy!';
   const st=streak(),w=bd?'Chúc con tuổi mới luôn vui khỏe, học giỏi và hái thật nhiều ngôi sao!':wish;
   return `<section class="hello"><svg viewBox="0 0 84 84" aria-hidden="true"><g stroke="var(--sun)" stroke-width="5" stroke-linecap="round"><path d="M42 4v10M42 70v10M4 42h10M70 42h10M15 15l7 7M62 62l7 7M69 15l-7 7M22 62l-7 7"/></g><circle cx="42" cy="42" r="22" fill="var(--sun)"/><circle cx="34" cy="38" r="3" fill="var(--sun-ink)"/><circle cx="50" cy="38" r="3" fill="var(--sun-ink)"/><path d="M33 47q9 9 18 0" stroke="var(--sun-ink)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-  <div><h2>${hi}</h2><p class="wish">${w}</p><p class="streak">${st>1?`Con đã học ${st} ngày liên tiếp. `:''}Con đang có ${S.stars} ngôi sao.</p></div></section>`}
+  <div><h2>${hi}</h2><p class="wish">${w}</p><p class="streak">${st>1?`Con đã học ${st} ngày liên tiếp. `:''}Con đang có ${S.stars} ngôi sao${(n=>n?` và ${n} huy hiệu`:'')(Object.values(badges()).filter(Boolean).length)}.</p></div></section>`}
 function renderHome(){const wk=weakList();
   view.innerHTML=hello()+
-  `<div class="legend"><span>Mức độ bài tập:</span>${lvTag(1)}${lvTag(2)}${lvTag(3)}<span>(mức Khó là bài thử thách)</span></div>`+
+  `<div class="legend"><span>Mức độ bài tập:</span>${lvTag(1)}${lvTag(2)}${lvTag(3)}<span>(mức Khó là bài thử thách)</span></div>
+  <p class="soon"><b>Huy hiệu chủ đề:</b> Đồng khi con làm đủ 8 câu ở mỗi dạng bài; Bạc khi mỗi dạng đúng từ 85%; Vàng khi thêm 5 câu mức Khó ở mỗi dạng, đúng từ 80%.</p>`+
   (wk.length?`<div class="rowbtn"><button class="btn sun" data-act="weak">Ôn lại phần con hay sai</button><span class="soon">Gồm: ${wk.slice(0,3).map(x=>esc(x.s.name)).join('; ')}.</span></div>`:'')+
-  TOPICS.map((t,i)=>`<section class="topic"><div class="topic-head"><div><h2>Chủ đề ${i+1}. ${t.name}</h2><p>${t.sub}</p></div>
+  TOPICS.map((t,i)=>`<section class="topic"><div class="topic-head"><div><h2>Chủ đề ${i+1}. ${t.name}</h2><p>${t.sub}</p>${medal(badge(t.id))}</div>
     <div class="mix"><span>Luyện tổng hợp:</span>${[1,2,3].map(l=>`<button class="lv lv${l} lvbtn" data-act="mix" data-t="${t.id}" data-lv="${l}">${ICON[l]}${LV[l]}</button>`).join('')}</div></div>
     <div class="cards">${SK.filter(s=>s.t===t.id).map(s=>{const st=stat(s.id);return `<article class="card"><h3>${s.name}</h3>
       <p class="meta">${st.n?`Đã làm ${st.n} câu, đúng ${st.acc}%`:'Chưa luyện tập'}</p>
       <div class="lvbtns">${[1,2,3].map(l=>`<button class="lv lv${l} lvbtn" data-act="start" data-sk="${s.id}" data-lv="${l}" aria-label="${s.name}, mức ${LV[l]}">${ICON[l]}${LV[l]}</button>`).join('')}</div></article>`}).join('')}</div></section>`).join('')+
-  `<p class="soon"><b>Sắp bổ sung:</b> Phép cộng, phép trừ (có nhớ) trong phạm vi 100; Làm quen với hình phẳng; Ngày – giờ, giờ – phút, ngày – tháng; các chủ đề của học kỳ 2.</p>`}
+  `<section class="topic"><div class="topic-head"><div><h2>Ôn tập học kỳ 1</h2><p>Mỗi lượt 12 câu, trộn các dạng bài của cả sáu chủ đề.</p></div>
+    <div class="mix"><span>Chọn mức:</span>${[1,2,3].map(l=>`<button class="lv lv${l} lvbtn" data-act="mixall" data-lv="${l}">${ICON[l]}${LV[l]}</button>`).join('')}</div></div></section>
+  <p class="soon"><b>Sắp bổ sung:</b> các chủ đề của học kỳ 2 (phép nhân, phép chia, các số đến 1000, mét và ki-lô-mét, tiền Việt Nam, khối trụ và khối cầu, biểu đồ tranh).</p>`}
 
 function build(list,n){const qs=[],seen=new Set();let g=0;
   while(qs.length<n&&g++<300){const[sk,lv]=list[qs.length%list.length],q=G[sk](lv),key=q.t+(q.pv||'')+q.ans;if(seen.has(key))continue;seen.add(key);q.sk=sk;q.lv=lv;q.in='';q.sel=null;qs.push(q)}
   return qs}
-function startP(title,list,again){P={title,list,qs:build(list,8),i:0};cur='prac';render();window.scrollTo(0,0)}
+function startP(title,list,n){P={title,list,n:n||8,qs:build(list,n||8),i:0,b0:badges()};cur='prac';render();window.scrollTo(0,0)}
 function renderPrac(){const q=P.qs[P.i];
   view.innerHTML=`<section class="prac"><div class="ptop"><button class="btn ghost" data-act="home">← Trang chính</button><h2>${esc(P.title)}</h2><span class="pcount">Câu ${P.i+1}/${P.qs.length}</span></div>
   <div class="pips" id="pips"></div>
@@ -451,7 +645,7 @@ function reveal(){const q=P.qs[P.i];if(q.res===undefined){q.res=false;rec(q,fals
   const good=q.done&&q.res;lock(q);fb(`Đáp án đúng: <b>${shown(q)}</b>${sol(q)}`,good?'ok':'info');pips()}
 function renderResult(){const ok=P.qs.filter(q=>q.res===true).length,n=P.qs.length,bad=P.qs.filter(q=>q.res!==true);
   const msg=ok===n?'Xuất sắc! Hà Vy làm đúng tất cả các câu.':ok>=n*0.75?'Rất tốt! Con chỉ cần cẩn thận thêm một chút nữa.':ok>=n*0.5?'Con đã cố gắng. Mình cùng ôn lại các câu sai nhé!':'Không sao cả. Con xem lại lời giải rồi luyện thêm, con sẽ tiến bộ!';
-  view.innerHTML=`<section class="result"><h2>Kết quả: ${esc(P.title)}</h2><p class="score">${ok}/${n} câu đúng</p><p>${msg}</p>
+  view.innerHTML=`<section class="result"><h2>Kết quả: ${esc(P.title)}</h2><p class="score">${ok}/${n} câu đúng</p><p>${msg}</p>${(()=>{const b=badges();return TOPICS.filter(t=>b[t.id]>(P.b0?P.b0[t.id]:0)).map(t=>`<p class="fb ok"><span class="medal">${MED(b[t.id])}</span> Chúc mừng! Con vừa nhận Huy hiệu ${HH[b[t.id]]} của chủ đề "${t.name}".</p>`).join('')})()}
   <ul class="rlist">${P.qs.map((q,i)=>`<li><b class="mk ${q.res?'ok':'bad'}">${q.res?'✓':'✗'}</b><span>Câu ${i+1}: ${q.t.replace(/<span class="box">\?<\/span>/g,'?')}${q.pv?' ('+esc(q.pv)+')':''} <b>Đáp án: ${shown(q)}</b></span></li>`).join('')}</ul>
   <div class="actions">${bad.length?'<button class="btn sun" data-act="retry">Làm lại các câu sai</button>':''}${P.list?'<button class="btn" data-act="again">Luyện thêm một lượt mới</button>':''}<button class="btn primary" data-act="home">Về trang chính</button></div></section>`}
 
@@ -471,6 +665,8 @@ function renderParent(){const all=SK.map(s=>({s,st:stat(s.id)})),tot=all.reduce(
    <div class="tile"><b>${Math.round(ok*100/tot)}%</b><span>Tỷ lệ đúng</span></div><div class="tile"><b>${S.days.length}</b><span>Ngày có học</span></div></div>
    <div class="tw"><table><thead><tr><th>Mức độ</th><th>Số câu</th><th>Đúng</th><th>Sai</th><th>Tỷ lệ đúng</th><th></th></tr></thead><tbody>
    ${byL.map(x=>`<tr><td>${lvTag(x.l)}</td><td class="n">${x.n}</td><td class="n">${x.o}</td><td class="n">${x.n-x.o}</td><td class="n">${x.n?Math.round(x.o*100/x.n)+'%':'–'}</td><td><div class="bar ${x.n?'':'empty'}"><i style="width:${x.n?x.o*100/x.n:0}%"></i></div></td></tr>`).join('')}</tbody></table></div></section>
+  <section class="panel"><h3>Huy hiệu theo chủ đề</h3><div class="tw"><table><thead><tr><th>Chủ đề</th><th>Huy hiệu</th><th>Việc cần làm để lên mức tiếp theo</th></tr></thead><tbody>
+   ${TOPICS.map((t,i)=>{const b=badge(t.id),ss=all.filter(x=>x.s.t===t.id);const need=b===0?'Làm đủ 8 câu ở mỗi dạng. Còn thiếu: '+ss.filter(x=>x.st.n<8).map(x=>x.s.name).join('; '):b===1?'Mỗi dạng đúng từ 85%. Chưa đạt: '+ss.filter(x=>x.st.acc<85).map(x=>x.s.name).join('; '):b===2?'Mỗi dạng làm thêm đủ 5 câu mức Khó, đúng từ 80%':'Đã đạt mức cao nhất';return `<tr><td>${i+1}. ${t.name}</td><td>${medal(b)}</td><td>${need}</td></tr>`}).join('')}</tbody></table></div></section>
   <section class="panel"><h3>Kết quả theo từng dạng bài</h3><div class="tw"><table><thead><tr><th>Chủ đề</th><th>Dạng bài</th><th>Số câu</th><th>Đúng</th><th>Sai</th><th>Tỷ lệ đúng</th><th>Đánh giá</th></tr></thead><tbody>
    ${all.map(x=>{const g=grade(x.st);return `<tr><td>${TOPICS.findIndex(t=>t.id===x.s.t)+1}</td><td>${x.s.name}</td><td class="n">${x.st.n}</td><td class="n">${x.st.ok}</td><td class="n">${x.st.n-x.st.ok}</td><td class="n">${x.st.n?x.st.acc+'%':'–'}</td><td><span class="pill ${g[0]}">${g[1]}</span></td></tr>`}).join('')}</tbody></table></div></section>
   <section class="panel"><h3>Kiến thức bé thường sai</h3>${weak.length?`<ol class="plist">${weak.map(x=>{const g=grade(x.st),m=S.miss.filter(z=>z.s===x.s.id).slice(0,2);
@@ -496,8 +692,9 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
   else if(a==='choose'){const q=P.qs[P.i];if(q.done)return;q.sel=d.c;view.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed',String(c===b)))}
   else if(a==='check')check();else if(a==='reveal')reveal();
   else if(a==='next'){if(P.i+1<P.qs.length){P.i++;renderPrac();window.scrollTo(0,0)}else{cur='result';render();window.scrollTo(0,0)}}
-  else if(a==='retry'){const qs=P.qs.filter(q=>q.res!==true).map(q=>Object.assign({},q,{res:undefined,done:false,in:'',sel:null,redo:true}));P={title:'Làm lại các câu sai',list:null,qs,i:0};cur='prac';render();window.scrollTo(0,0)}
-  else if(a==='again')startP(P.title,P.list);
+  else if(a==='retry'){const qs=P.qs.filter(q=>q.res!==true).map(q=>Object.assign({},q,{res:undefined,done:false,in:'',sel:null,redo:true}));P={title:'Làm lại các câu sai',list:null,qs,i:0,b0:badges()};cur='prac';render();window.scrollTo(0,0)}
+  else if(a==='again')startP(P.title,P.list,P.n);
+  else if(a==='mixall')startP('Ôn tập học kỳ 1',shuf(SK.map(s=>[s.id,+d.lv])),12);
   else if(a==='reset'){askReset=true;render()}else if(a==='resetNo'){askReset=false;render()}
   else if(a==='resetYes'){S=fresh();askReset=false;save();render()}});
 document.addEventListener('keydown',e=>{if(cur!=='prac')return;if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==='Backspace')key('x');
